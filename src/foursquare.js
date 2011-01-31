@@ -19,7 +19,10 @@ function getRequest(url, access_token, callback) {
 	if( parsedUrl.query === undefined) {
 		parsedUrl.query= {};
 	}
-	parsedUrl.query["oauth_token"]= access_token;
+
+	if (access_token != null) {
+		parsedUrl.query["oauth_token"]= access_token;
+	}
 
 	request = HTTPS.request({
 		host: parsedUrl.hostname,
@@ -88,7 +91,27 @@ exports.getAccessToken = function (params, successHandler) {
 };
 
 
-exports.getUser = function (user_id, access_token, successHandler) {
+exports.getVenue = function (venue_id, access_token, success_handler) {
+
+	var url = "https://api.foursquare.com/v2/venues/" + venue_id;
+
+	getRequest(url, access_token, function (status, result) {
+
+		var json;
+		if (status !== undefined && result !== undefined) {
+
+			json = JSON.parse(result);
+			if (json !== undefined && json.response !== undefined && json.response.venue !== undefined) {
+
+				if (success_handler !== undefined) {
+					success_handler(json.response.venue);
+				}
+			}
+		}
+	});
+};
+
+exports.getUser = function (user_id, access_token, success_handler) {
 
 	var url = "https://api.foursquare.com/v2/users/" + user_id;
 
@@ -100,8 +123,8 @@ exports.getUser = function (user_id, access_token, successHandler) {
 			json = JSON.parse(result);
 			if (json !== undefined && json.response !== undefined && json.response.user !== undefined) {
 
-				if (successHandler !== undefined) {
-					successHandler(json.response.user);
+				if (success_handler !== undefined) {
+					success_handler(json.response.user);
 				}
 			}
 		}
