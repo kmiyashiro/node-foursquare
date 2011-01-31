@@ -1,6 +1,8 @@
 var sys = require('sys'),
 	express = require('express');
 
+var FOURSQ = require('./foursquare');
+
 var OAuth2 = require('./oauth2').OAuth2;
 
 var CLIENT_ID = "YIFDUZIWSP1TQL51DFDC2K3FMWHOSV14RKRSXOYZX50A0KHU";
@@ -15,17 +17,6 @@ var oa = new OAuth2(CLIENT_ID,
 
 var app = express.createServer();
 
-
-function getBadges(access_token) {
-	
-	var USER_ID = "self",
-		url = "https://api.foursquare.com/v2/users/" + USER_ID + "/badges"
-
-	oa.get(url, access_token, function () {	
-		console.log(arguments);
-	});
-}
-
 app.get('/login', function(req, res) {
 
 	var loc = "https://foursquare.com/oauth2/authenticate?client_id=" + CLIENT_ID + "&response_type=code&redirect_uri=" + REDIRECT_URI;
@@ -34,16 +25,18 @@ app.get('/login', function(req, res) {
 });
 
 app.get('/callback', function (req, res) {
-	
+
 	var code = req.query.code;
 	var params = {
 		grant_type: "authorization_code",
 		redirect_uri: REDIRECT_URI,
 	};
 	oa.getOAuthAccessToken(code, params, function (status, access_token, refresh_token) {
-		console.log(arguments);
 		if (access_token !== undefined) {
-			getBadges(access_token);
+
+			FOURSQ.getUser("self", access_token, function (user) {
+				console.log(user);
+			});
 		} else {
 			console.log("access_token is undefined.")
 		}
@@ -51,7 +44,7 @@ app.get('/callback', function (req, res) {
 });
 
 app.get('/', function(req, res){
-    res.send('Hello World');
+    res.send('Hello Foursquare');
 });
 
 app.listen(30000);
