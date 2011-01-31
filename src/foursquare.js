@@ -3,60 +3,57 @@ var QUERYSTRING = require('querystring'),
     URL = require('url');
 
 
-function get(method, url, headers, access_token, callback) {
+function getRequest(url, access_token, callback) {
 
-  var parsedUrl = URL.parse(url, true );
-  if( parsedUrl.protocol == "https:" && !parsedUrl.port ) parsedUrl.port= 443;
+	var parsedUrl = URL.parse(url, true ),
+		request, result = "";
 
-	var request, result = "";
+	if (parsedUrl.protocol == "https:" && !parsedUrl.port) {
+		parsedUrl.port= 443;
+	}
 
-  var realHeaders= {};
-  if( headers ) {
-    for(var key in headers) {
-      realHeaders[key] = headers[key];
-    }
-  }
+	if( parsedUrl.query === undefined) {
+		parsedUrl.query= {};
+	}
+	parsedUrl.query["oauth_token"]= access_token;
 
-  //TODO: Content length should be dynamic when dealing with POST methods....
-  realHeaders['Content-Length']= 0;
-  if( access_token ) {
-    if( ! parsedUrl.query ) parsedUrl.query= {};
-    parsedUrl.query["oauth_token"]= access_token;
-  }
-
-	console.log(parsedUrl.pathname + "?" + QUERYSTRING.stringify(parsedUrl.query));
-  request = HTTPS.request({
-	  host: parsedUrl.hostname,
-	  port: parsedUrl.port,
-	  path: parsedUrl.pathname + "?" + QUERYSTRING.stringify(parsedUrl.query),
-	  method: method,
-		headers: realHeaders
+	request = HTTPS.request({
+		host: parsedUrl.hostname,
+		port: parsedUrl.port,
+		path: parsedUrl.pathname + "?" + QUERYSTRING.stringify(parsedUrl.query),
+		method: "GET"
 	}, function(res) {
 		res.on('data', function(chunk) {
 			result+= chunk;
 		});
 
-    res.on("end", function () {
-      if( res.statusCode != 200 ) {
-        callback({ statusCode: res.statusCode, data: result });
-      } else {
-        callback(null, result, res);
-      }
-    });
-  });
+		res.on("end", function () {
+			callback(res.statusCode, result);
+		});
+	});
 
-  request.end();
+	request.end();
 }
 
 
 
 
 exports.getUser = function (user_id, access_token, successHandler) {
-	
+
 	var url = "https://api.foursquare.com/v2/users/" + user_id;
-	
-	get(url, access_token, function () {	
-		console.log(arguments);
+
+	getRequest(url, access_token, function (status, result) {
+
+		var json;
+		if (status !== undefined && result !== undefined) {
+
+			json = JSON.parse(result);
+			if (json !== undefined && json.response !== undefined && json.response.user !== undefined) {
+
+				if (successHandler !== undefined) {
+					successHandler(json.response.user);
+				}
+			}
+		}
 	});
-	
 };
