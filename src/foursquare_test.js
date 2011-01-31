@@ -3,17 +3,9 @@ var sys = require('sys'),
 
 var FOURSQ = require('./foursquare');
 
-var OAuth2 = require('./oauth2').OAuth2;
-
 var CLIENT_ID = "YIFDUZIWSP1TQL51DFDC2K3FMWHOSV14RKRSXOYZX50A0KHU";
+var CLIENT_SECRET = "BCTEDAVRJK0TXQXLQF3UCB5QCVDMPUCHTJFLHZI2LUXWA2ZW";
 var REDIRECT_URI = "http://distancebodza.com:30000/callback";
-
-var oa = new OAuth2(CLIENT_ID,
-				   "BCTEDAVRJK0TXQXLQF3UCB5QCVDMPUCHTJFLHZI2LUXWA2ZW",
-					"https://foursquare.com",
-					"/oauth2/authorize",
-					"/oauth2/access_token");
-
 
 var app = express.createServer();
 
@@ -27,19 +19,23 @@ app.get('/login', function(req, res) {
 app.get('/callback', function (req, res) {
 
 	var code = req.query.code;
-	var params = {
-		grant_type: "authorization_code",
+
+	FOURSQ.getAccessToken({
+		code: code,
 		redirect_uri: REDIRECT_URI,
-	};
-	oa.getOAuthAccessToken(code, params, function (status, access_token, refresh_token) {
+		client_id: CLIENT_ID,
+		client_secret: CLIENT_SECRET
+	}, function (access_token) {
+
 		if (access_token !== undefined) {
 
 			FOURSQ.getUser("self", access_token, function (user) {
 				console.log(user);
 			});
 		} else {
-			console.log("access_token is undefined.")
+			console.log("access_token is undefined.");
 		}
+
 	});
 });
 

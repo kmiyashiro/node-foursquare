@@ -3,6 +3,10 @@ var QUERYSTRING = require('querystring'),
     URL = require('url');
 
 
+BASESITE = "https://foursquare.com";
+ACCESS_TOKEN_URL = "/oauth2/access_token";
+
+
 function getRequest(url, access_token, callback) {
 
 	var parsedUrl = URL.parse(url, true ),
@@ -36,6 +40,52 @@ function getRequest(url, access_token, callback) {
 }
 
 
+exports.getAccessToken = function (params, successHandler) {
+
+	// adding extra params
+	params["grant_type"] = "authorization_code";
+
+	var url = BASESITE + ACCESS_TOKEN_URL + "?" + QUERYSTRING.stringify(params);
+
+
+	var parsedUrl = URL.parse(url, true ),
+		request, result = "";
+
+	if (parsedUrl.protocol == "https:" && !parsedUrl.port) {
+		parsedUrl.port= 443;
+	}
+
+	if( parsedUrl.query === undefined) {
+		parsedUrl.query= {};
+	}
+
+	request = HTTPS.request({
+		host: parsedUrl.hostname,
+		port: parsedUrl.port,
+		path: parsedUrl.pathname + "?" + QUERYSTRING.stringify(parsedUrl.query),
+		method: "POST",
+		headers: {
+			'Content-Length': 0
+		}
+	}, function(res) {
+		res.on('data', function(chunk) {
+			result+= chunk;
+		});
+
+		res.on("end", function () {
+
+			var json;
+
+			if (successHandler !== undefined && result !== undefined) {
+
+				json = JSON.parse(result);
+				successHandler(json.access_token);
+			}
+		});
+	});
+
+	request.end();
+};
 
 
 exports.getUser = function (user_id, access_token, successHandler) {
