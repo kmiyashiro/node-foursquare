@@ -33,12 +33,12 @@ app.get('/callback', function (req, res) {
 
 			console.log("Access token " + access_token);
 
-			// FOURSQ.getUser("self", access_token, function (user) {
-			// 	res.send(JSON.stringify(user));
-			// }, function (error) {
-			// 	res.send(JSON.stringify(error));
-			// });
-			//
+			FOURSQ.getUser("self", access_token, function (user) {
+				res.send(JSON.stringify(user));
+			}, function (error) {
+				res.send(JSON.stringify(error));
+			});
+
 			// FOURSQ.getVenue(5104, access_token, function (venue) {
 			// 	res.send(JSON.stringify(venue));
 			// }, function (error) {
@@ -51,11 +51,11 @@ app.get('/callback', function (req, res) {
 			// 	res.send(JSON.stringify(error));
 			// });
 
-			FOURSQ.getTip("4b5e662a70c603bba7d790b4", access_token, function (data) {
-				res.send(JSON.stringify(data));
-			}, function (error) {
-				res.send(JSON.stringify(error));
-			});
+			// FOURSQ.getTip("4b5e662a70c603bba7d790b4", access_token, function (data) {
+			// 	res.send(JSON.stringify(data));
+			// }, function (error) {
+			// 	res.send(JSON.stringify(error));
+			// });
 
 		} else {
 			console.log("access_token is undefined.");

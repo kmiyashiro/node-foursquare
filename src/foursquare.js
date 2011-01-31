@@ -137,45 +137,20 @@ exports.getCheckin = function (checkin_id, access_token, success_handler, error_
 };
 
 
-exports.getVenue = function (venue_id, access_token, success_handler) {
+exports.getVenue = function (venue_id, access_token, success_handler, error_handler) {
 
 	var url = "https://api.foursquare.com/v2/venues/" + venue_id;
 
 	getRequest(url, access_token, function (status, result) {
-
-		var json;
-		if (status !== undefined && result !== undefined) {
-
-			json = JSON.parse(result);
-
-			if (json.meta.code === 200) {
-				if (json.response !== undefined && json.response.venue !== undefined) {
-
-					if (success_handler !== undefined) {
-						success_handler(json.response.venue);
-					}
-				}
-			}
-		}
+		extractData(status, result, "venue", success_handler, error_handler);
 	});
 };
 
-exports.getUser = function (user_id, access_token, success_handler) {
+exports.getUser = function (user_id, access_token, success_handler, error_handler) {
 
 	var url = "https://api.foursquare.com/v2/users/" + user_id;
 
 	getRequest(url, access_token, function (status, result) {
-
-		var json;
-		if (status !== undefined && result !== undefined) {
-
-			json = JSON.parse(result);
-			if (json !== undefined && json.response !== undefined && json.response.user !== undefined) {
-
-				if (success_handler !== undefined) {
-					success_handler(json.response.user);
-				}
-			}
-		}
+		extractData(status, result, "user", success_handler, error_handler);
 	});
 };
