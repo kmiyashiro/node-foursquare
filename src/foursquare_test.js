@@ -1,10 +1,12 @@
 var sys = require('sys'),
 	express = require('express');
 
-var FOURSQ = require('./foursquare');
+var FOURSQ = require('./foursquare'),
+	KEYS = require('./key');
 
-var CLIENT_ID = "YIFDUZIWSP1TQL51DFDC2K3FMWHOSV14RKRSXOYZX50A0KHU";
-var CLIENT_SECRET = "BCTEDAVRJK0TXQXLQF3UCB5QCVDMPUCHTJFLHZI2LUXWA2ZW";
+
+var CLIENT_ID = KEYS.CLIENT_ID;
+var CLIENT_SECRET = KEYS.CLIENT_SECRET;
 var REDIRECT_URI = "http://distancebodza.com:30000/callback";
 
 var app = express.createServer();
@@ -29,9 +31,26 @@ app.get('/callback', function (req, res) {
 
 		if (access_token !== undefined) {
 
-			FOURSQ.getUser("self", access_token, function (user) {
-				console.log(user);
+			console.log("Access token " + access_token);
+
+			// FOURSQ.getUser("self", access_token, function (user) {
+			// 	res.send(JSON.stringify(user));
+			// }, function (error) {
+			// 	res.send(JSON.stringify(error));
+			// });
+			//
+			// FOURSQ.getVenue(5104, access_token, function (venue) {
+			// 	res.send(JSON.stringify(venue));
+			// }, function (error) {
+			// 	res.send(JSON.stringify(error));
+			// });
+
+			FOURSQ.getCheckin("IHR8THISVNU", access_token, function (checkin) {
+				res.send(JSON.stringify(checkin));
+			}, function (error) {
+				res.send(JSON.stringify(error));
 			});
+
 		} else {
 			console.log("access_token is undefined.");
 		}
@@ -42,5 +61,6 @@ app.get('/callback', function (req, res) {
 app.get('/', function(req, res){
     res.send('Hello Foursquare');
 });
+
 
 app.listen(30000);

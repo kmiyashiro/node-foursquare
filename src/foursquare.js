@@ -42,6 +42,33 @@ function getRequest(url, access_token, callback) {
 	request.end();
 }
 
+function extractData(status, result, field, succes_handler, error_handler) {
+
+	var json;
+
+	if (status !== undefined && result !== undefined) {
+
+		json = JSON.parse(result);
+
+		// 200
+		if (json.meta.code === 200) {
+			if (json.response !== undefined && json.response[field] !== undefined) {
+
+				if (success_handler !== undefined) {
+					success_handler(json.response.venue);
+				}
+			}
+		}
+
+		// 400
+		if (json.meta.code === 400) {
+			if (error_handler !== undefined) {
+				error_handler(json.meta);
+			}
+		}
+	}
+}
+
 
 exports.getAccessToken = function (params, successHandler) {
 
@@ -91,6 +118,16 @@ exports.getAccessToken = function (params, successHandler) {
 };
 
 
+exports.getCheckin = function (checkin_id, access_token, success_handler, error_handler) {
+
+	var url = "https://api.foursquare.com/v2/checkins/" + checkin_id;
+
+	getRequest(url, access_token, function (status, result) {
+		extractData(status, result, "checkin", success_handler, error_handler);
+	});
+};
+
+
 exports.getVenue = function (venue_id, access_token, success_handler) {
 
 	var url = "https://api.foursquare.com/v2/venues/" + venue_id;
@@ -101,10 +138,13 @@ exports.getVenue = function (venue_id, access_token, success_handler) {
 		if (status !== undefined && result !== undefined) {
 
 			json = JSON.parse(result);
-			if (json !== undefined && json.response !== undefined && json.response.venue !== undefined) {
 
-				if (success_handler !== undefined) {
-					success_handler(json.response.venue);
+			if (json.meta.code === 200) {
+				if (json.response !== undefined && json.response.venue !== undefined) {
+
+					if (success_handler !== undefined) {
+						success_handler(json.response.venue);
+					}
 				}
 			}
 		}
