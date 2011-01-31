@@ -45,8 +45,14 @@ app.get('/callback', function (req, res) {
 			// 	res.send(JSON.stringify(error));
 			// });
 
-			FOURSQ.getCheckin("IHR8THISVNU", access_token, function (checkin) {
-				res.send(JSON.stringify(checkin));
+			// FOURSQ.getCheckin("IHR8THISVNU", access_token, function (checkin) {
+			// 	res.send(JSON.stringify(checkin));
+			// }, function (error) {
+			// 	res.send(JSON.stringify(error));
+			// });
+
+			FOURSQ.getTip("4b5e662a70c603bba7d790b4", access_token, function (data) {
+				res.send(JSON.stringify(data));
 			}, function (error) {
 				res.send(JSON.stringify(error));
 			});

@@ -42,7 +42,7 @@ function getRequest(url, access_token, callback) {
 	request.end();
 }
 
-function extractData(status, result, field, succes_handler, error_handler) {
+function extractData(status, result, field, success_handler, error_handler) {
 
 	var json;
 
@@ -55,7 +55,7 @@ function extractData(status, result, field, succes_handler, error_handler) {
 			if (json.response !== undefined && json.response[field] !== undefined) {
 
 				if (success_handler !== undefined) {
-					success_handler(json.response.venue);
+					success_handler(json.response[field]);
 				}
 			}
 		}
@@ -117,6 +117,15 @@ exports.getAccessToken = function (params, successHandler) {
 	request.end();
 };
 
+
+exports.getTip = function (tip_id, access_token, success_handler, error_handler) {
+
+	var url = "https://api.foursquare.com/v2/tips/" + tip_id;
+
+	getRequest(url, access_token, function (status, result) {
+		extractData(status, result, "tip", success_handler, error_handler);
+	});
+};
 
 exports.getCheckin = function (checkin_id, access_token, success_handler, error_handler) {
 
