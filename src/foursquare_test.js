@@ -33,11 +33,18 @@ app.get('/callback', function (req, res) {
 
 			console.log("Access token " + access_token);
 
-			FOURSQ.getUser("self", access_token, function (user) {
-				res.send(JSON.stringify(user));
+			FOURSQ.getPhoto("4d0fb8162d39a340637dc42b", access_token, function (photo) {
+				res.send(JSON.stringify(photo));
 			}, function (error) {
 				res.send(JSON.stringify(error));
 			});
+
+
+			// FOURSQ.getUser("self", access_token, function (user) {
+			// 	res.send(JSON.stringify(user));
+			// }, function (error) {
+			// 	res.send(JSON.stringify(error));
+			// });
 
 			// FOURSQ.getVenue(5104, access_token, function (venue) {
 			// 	res.send(JSON.stringify(venue));

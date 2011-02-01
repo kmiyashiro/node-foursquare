@@ -117,6 +117,14 @@ exports.getAccessToken = function (params, successHandler) {
 	request.end();
 };
 
+exports.getPhoto = function (photo_id, access_token, success_handler, error_handler) {
+
+	var url = "https://api.foursquare.com/v2/photos/" + photo_id;
+
+	getRequest(url, access_token, function (status, result) {
+		extractData(status, result, "photo", success_handler, error_handler);
+	});
+}
 
 exports.getTip = function (tip_id, access_token, success_handler, error_handler) {
 
