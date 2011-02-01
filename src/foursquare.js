@@ -119,6 +119,29 @@ exports.getAccessToken = function (params, successHandler) {
 };
 
 
+exports.searchVenues = function (query, access_token, success_handler, error_handler) {
+
+	var url = API_URL + "/venues/search";
+
+	url += "?" + QUERYSTRING.stringify(query);
+
+	getRequest(url, access_token, function (status, result) {
+		extractData(status, result, "groups", success_handler, error_handler);
+	});
+};
+
+exports.searchUsers = function (query, access_token, success_handler, error_handler) {
+
+	var url = API_URL + "/users/search";
+
+	url += "?" + QUERYSTRING.stringify(query);
+
+	getRequest(url, access_token, function (status, result) {
+		extractData(status, result, "results", success_handler, error_handler);
+	});
+};
+
+
 exports.getSettings = function (access_token, success_handler, error_handler) {
 
 	var url = API_URL + "/settings/all";
