@@ -5,6 +5,7 @@ var QUERYSTRING = require('querystring'),
 
 BASESITE = "https://foursquare.com";
 ACCESS_TOKEN_URL = "/oauth2/access_token";
+API_URL = "https://api.foursquare.com/v2";
 
 
 function getRequest(url, access_token, callback) {
@@ -117,14 +118,24 @@ exports.getAccessToken = function (params, successHandler) {
 	request.end();
 };
 
+
+exports.getSettings = function (access_token, success_handler, error_handler) {
+
+	var url = API_URL + "/settings/all";
+
+	getRequest(url, access_token, function (status, result) {
+		extractData(status, result, "settings", success_handler, error_handler);
+	});
+};
+
 exports.getPhoto = function (photo_id, access_token, success_handler, error_handler) {
 
-	var url = "https://api.foursquare.com/v2/photos/" + photo_id;
+	var url = API_URL + "/photos/" + photo_id;
 
 	getRequest(url, access_token, function (status, result) {
 		extractData(status, result, "photo", success_handler, error_handler);
 	});
-}
+};
 
 exports.getTip = function (tip_id, access_token, success_handler, error_handler) {
 
