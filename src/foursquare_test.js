@@ -1,5 +1,6 @@
 var sys = require('sys'),
-	express = require('express');
+	express = require('express'),
+	assert = require('assert');
 
 var FOURSQ = require('./foursquare'),
 	KEYS = require('./key');
@@ -8,6 +9,7 @@ var FOURSQ = require('./foursquare'),
 var CLIENT_ID = KEYS.CLIENT_ID;
 var CLIENT_SECRET = KEYS.CLIENT_SECRET;
 var REDIRECT_URI = "http://distancebodza.com:30000/callback";
+
 
 var app = express.createServer();
 
@@ -33,42 +35,96 @@ app.get('/callback', function (req, res) {
 
 			console.log("Access token " + access_token);
 
+
 			FOURSQ.getSettings( access_token, function (data) {
-				res.send(JSON.stringify(data));
+
+				var result = JSON.stringify(data);
+
+				try {
+					assert.equal(result, '{"receivePings":false,"receiveCommentPings":true,"sendToTwitter":false,"sendToFacebook":false}');
+					console.log("-> getSettings OK");
+				} catch (e) {
+					console.log("-> getSettings ERROR");
+				}
+
 			}, function (error) {
-				res.send(JSON.stringify(error));
+				console.log("-> getSettings ERROR");
 			});
 
-			// FOURSQ.getPhoto("4d0fb8162d39a340637dc42b", access_token, function (photo) {
-			// 	res.send(JSON.stringify(photo));
-			// }, function (error) {
-			// 	res.send(JSON.stringify(error));
-			// });
+
+			FOURSQ.getPhoto("4d0fb8162d39a340637dc42b", access_token, function (data) {
+				var result = data.id;
+
+				try {
+					assert.equal(result, "4d0fb8162d39a340637dc42b");
+					console.log("-> getPhoto OK");
+				} catch (e) {
+					console.log("-> getPhoto ERROR");
+				}
+
+			}, function (error) {
+				console.log("-> getPhoto ERROR");
+			});
 
 
-			// FOURSQ.getUser("self", access_token, function (user) {
-			// 	res.send(JSON.stringify(user));
-			// }, function (error) {
-			// 	res.send(JSON.stringify(error));
-			// });
+			FOURSQ.getUser("self", access_token, function (data) {
+				var result = data.id;
 
-			// FOURSQ.getVenue(5104, access_token, function (venue) {
-			// 	res.send(JSON.stringify(venue));
-			// }, function (error) {
-			// 	res.send(JSON.stringify(error));
-			// });
+				try {
+					assert.equal(result, "285404");
+					console.log("-> getUser OK");
+				} catch (e) {
+					console.log("-> getUser ERROR");
+				}
 
-			// FOURSQ.getCheckin("IHR8THISVNU", access_token, function (checkin) {
-			// 	res.send(JSON.stringify(checkin));
-			// }, function (error) {
-			// 	res.send(JSON.stringify(error));
-			// });
+			}, function (error) {
+				console.log("-> getUser ERROR");
+			});
 
-			// FOURSQ.getTip("4b5e662a70c603bba7d790b4", access_token, function (data) {
-			// 	res.send(JSON.stringify(data));
-			// }, function (error) {
-			// 	res.send(JSON.stringify(error));
-			// });
+			FOURSQ.getVenue(5104, access_token, function (data) {
+				var result = data.id;
+
+				try {
+					assert.equal(result, "40a55d80f964a52020f31ee3");
+					console.log("-> getVenue OK");
+				} catch (e) {
+					console.log("-> getVenue ERROR");
+				}
+
+			}, function (error) {
+				console.log("-> getVenue ERROR");
+			});
+
+			FOURSQ.getCheckin("IHR8THISVNU", access_token, function (data) {
+				var result = data.id;
+
+				try {
+					assert.equal(result, "IHR8THISVNU");
+					console.log("-> getCheckin OK");
+				} catch (e) {
+					console.log("-> getCheckin ERROR");
+				}
+
+			}, function (error) {
+				console.log("-> getCheckin ERROR");
+			});
+
+			FOURSQ.getTip("4b5e662a70c603bba7d790b4", access_token, function (data) {
+				var result = data.id;
+
+				try {
+					assert.equal(result, "4b5e662a70c603bba7d790b4");
+					console.log("-> getTip OK");
+				} catch (e) {
+					console.log("-> getTip ERROR");
+				}
+
+			}, function (error) {
+				console.log("-> getTip ERROR");
+			});
+
+
+			res.send('Please check the console.');
 
 		} else {
 			console.log("access_token is undefined.");
