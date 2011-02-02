@@ -119,6 +119,18 @@ exports.getAccessToken = function (params, successHandler) {
 };
 
 
+exports.getRecentCheckins = function (query, access_token, success_handler, error_handler) {
+
+	var url = API_URL + "/checkins/recent";
+
+	url += "?" + QUERYSTRING.stringify(query);
+
+	getRequest(url, access_token, function (status, result) {
+		extractData(status, result, "recent", success_handler, error_handler);
+	});
+
+};
+
 exports.searchVenues = function (query, access_token, success_handler, error_handler) {
 
 	var url = API_URL + "/venues/search";
