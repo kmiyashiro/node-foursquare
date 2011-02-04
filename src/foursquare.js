@@ -118,6 +118,23 @@ exports.getAccessToken = function (params, successHandler) {
 	request.end();
 };
 
+/**
+ * Returns a list of tips near the area specified.
+ *
+ * http://developer.foursquare.com/docs/tips/search.html
+ */
+exports.searchTips = function (query, access_token, success_handler, error_handler) {
+
+	var url = API_URL + "/tips/search";
+
+	url += "?" + QUERYSTRING.stringify(query);
+
+	getRequest(url, access_token, function (status, result) {
+		extractData(status, result, "tips", success_handler, error_handler);
+	});
+
+};
+
 
 exports.getRecentCheckins = function (query, access_token, success_handler, error_handler) {
 

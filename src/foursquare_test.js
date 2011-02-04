@@ -52,6 +52,27 @@ function testVenueSearch(access_token) {
 	});
 }
 
+function testTipSearch(access_token) {
+
+	var query = { ll: "40.7, -74" };
+
+	FOURSQ.searchTips(query, access_token, function (data) {
+
+		var result = data[0].text;
+
+		try {
+			assert.equal(result, 'It is time for espresso');
+			console.log("-> searchTips OK");
+		} catch (e) {
+			console.log("-> searchTips ERROR");
+		}
+
+	}, function (error) {
+		console.log(error);
+		console.log("-> searchTips ERROR");
+	});
+}
+
 
 var app = express.createServer();
 
@@ -75,6 +96,7 @@ app.get('/callback', function (req, res) {
 
 		if (access_token !== undefined) {
 
+			testTipSearch(access_token);
 			testUserSearch(access_token);
 			testVenueSearch(access_token);
 
