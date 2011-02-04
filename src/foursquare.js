@@ -174,7 +174,7 @@ exports.getPhoto = function (photo_id, access_token, success_handler, error_hand
 
 exports.getTip = function (tip_id, access_token, success_handler, error_handler) {
 
-	var url = "https://api.foursquare.com/v2/tips/" + tip_id;
+	var url = API_URL + "/tips/" + tip_id;
 
 	getRequest(url, access_token, function (status, result) {
 		extractData(status, result, "tip", success_handler, error_handler);
@@ -183,7 +183,7 @@ exports.getTip = function (tip_id, access_token, success_handler, error_handler)
 
 exports.getCheckin = function (checkin_id, access_token, success_handler, error_handler) {
 
-	var url = "https://api.foursquare.com/v2/checkins/" + checkin_id;
+	var url = API_URL + "/checkins/" + checkin_id;
 
 	getRequest(url, access_token, function (status, result) {
 		extractData(status, result, "checkin", success_handler, error_handler);
@@ -193,7 +193,7 @@ exports.getCheckin = function (checkin_id, access_token, success_handler, error_
 
 exports.getVenue = function (venue_id, access_token, success_handler, error_handler) {
 
-	var url = "https://api.foursquare.com/v2/venues/" + venue_id;
+	var url = API_URL + "/venues/" + venue_id;
 
 	getRequest(url, access_token, function (status, result) {
 		extractData(status, result, "venue", success_handler, error_handler);
@@ -202,7 +202,7 @@ exports.getVenue = function (venue_id, access_token, success_handler, error_hand
 
 exports.getUser = function (user_id, access_token, success_handler, error_handler) {
 
-	var url = "https://api.foursquare.com/v2/users/" + user_id;
+	var url = API_URL + "/users/" + user_id;
 
 	getRequest(url, access_token, function (status, result) {
 		extractData(status, result, "user", success_handler, error_handler);
