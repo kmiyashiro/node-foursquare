@@ -1,0 +1,15 @@
+{
+   "name": "foursquareonnode",
+   "version": "0.0.1",
+   "description": "Foursquare on Node, Foursquare API v2 wrapper for Node JS.",
+   "main": "foursquare.js",
+   "keywords": [
+       "foursquare",
+       "4sq"
+   ],
+   "repository" : {
+       "type" : "git",
+       "url" : "https://yikulju@github.com/yikulju/Foursquare-on-node.git"
+    }
+   
+}
