@@ -118,6 +118,18 @@ exports.getAccessToken = function (params, successHandler) {
 	request.end();
 };
 
+
+exports.getUserBadges = function (user_id, access_token, success_handler, error_handler) {
+
+	user_id = user_id || "self";
+
+	var url = API_URL + "/users/" + user_id + "/badges";
+
+	getRequest(url, access_token, function (status, result) {
+		extractData(status, result, "sets", success_handler, error_handler);
+	});
+};
+
 /**
  * Returns a list of tips near the area specified.
  *
