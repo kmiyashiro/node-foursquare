@@ -11,6 +11,8 @@ var CLIENT_SECRET = KEYS.CLIENT_SECRET;
 var REDIRECT_URI = "http://distancebodza.com:30000/callback";
 
 
+// Test functions
+
 function testUserSearch(access_token) {
 
 	var query = { twitter: "naveen" };
@@ -74,6 +76,130 @@ function testTipSearch(access_token) {
 }
 
 
+function testGetRecentCheckins(access_token) {
+
+	FOURSQ.getRecentCheckins( { limit: "20" }, access_token, function (data) {
+
+		var result = JSON.stringify(data);
+
+		try {
+			assert.ok(result);
+			console.log("-> getRecentCheckins OK");
+		} catch (e) {
+			console.log("-> getRecentCheckins ERROR");
+		}
+
+	}, function (error) {
+		console.log("-> getRecentCheckins ERROR");
+	});
+}
+
+function testGetSettings(access_token) {
+
+	FOURSQ.getSettings( access_token, function (data) {
+
+		var result = JSON.stringify(data);
+
+		try {
+			assert.ok(result);
+			console.log("-> getSettings OK");
+		} catch (e) {
+			console.log("-> getSettings ERROR");
+		}
+
+	}, function (error) {
+		console.log("-> getSettings ERROR");
+	});
+}
+
+
+function testGetPhoto(access_token) {
+
+	FOURSQ.getPhoto("4d0fb8162d39a340637dc42b", access_token, function (data) {
+		var result = data.id;
+
+		try {
+			assert.equal(result, "4d0fb8162d39a340637dc42b");
+			console.log("-> getPhoto OK");
+		} catch (e) {
+			console.log("-> getPhoto ERROR");
+		}
+
+	}, function (error) {
+		console.log("-> getPhoto ERROR");
+	});
+}
+
+function testGetUser(access_token) {
+
+	FOURSQ.getUser("self", access_token, function (data) {
+		var result = data;
+
+		try {
+			assert.ok(result);
+			console.log("-> getUser OK");
+		} catch (e) {
+			console.log("-> getUser ERROR");
+		}
+
+	}, function (error) {
+		console.log("-> getUser ERROR");
+	});
+}
+
+function testGetVenue(access_token) {
+
+	FOURSQ.getVenue(5104, access_token, function (data) {
+		var result = data.id;
+
+		try {
+			assert.equal(result, "40a55d80f964a52020f31ee3");
+			console.log("-> getVenue OK");
+		} catch (e) {
+			console.log("-> getVenue ERROR");
+		}
+
+	}, function (error) {
+		console.log("-> getVenue ERROR");
+	});
+}
+
+function testGetCheckin(access_token) {
+
+	FOURSQ.getCheckin("IHR8THISVNU", access_token, function (data) {
+		var result = data;
+
+		try {
+			assert.ok(result);
+			console.log("-> getCheckin OK");
+		} catch (e) {
+			console.log("-> getCheckin ERROR");
+		}
+
+	}, function (error) {
+		console.log("-> getCheckin ERROR");
+	});
+}
+
+function testGetTip(access_token) {
+
+	FOURSQ.getTip("4b5e662a70c603bba7d790b4", access_token, function (data) {
+		var result = data.id;
+
+		try {
+			assert.equal(result, "4b5e662a70c603bba7d790b4");
+			console.log("-> getTip OK");
+		} catch (e) {
+			console.log("-> getTip ERROR");
+		}
+
+	}, function (error) {
+		console.log("-> getTip ERROR");
+	});
+}
+
+
+
 var app = express.createServer();
 
 app.get('/login', function(req, res) {
@@ -100,110 +226,15 @@ app.get('/callback', function (req, res) {
 			testUserSearch(access_token);
 			testVenueSearch(access_token);
 
-			FOURSQ.getRecentCheckins( { limit: "20" }, access_token, function (data) {
+			testGetRecentCheckins(access_token);
+			testGetSettings(access_token);
+			testGetPhoto(access_token);
 
-				var result = JSON.stringify(data);
+			testGetUser(access_token);
+			testGetVenue(access_token);
 
-				try {
-					assert.ok(result);
-					console.log("-> getRecentCheckins OK");
-				} catch (e) {
-					console.log("-> getRecentCheckins ERROR");
-				}
-
-			}, function (error) {
-				console.log("-> getRecentCheckins ERROR");
-			});
-
-
-			FOURSQ.getSettings( access_token, function (data) {
-
-				var result = JSON.stringify(data);
-
-				try {
-					assert.ok(result);
-					console.log("-> getSettings OK");
-				} catch (e) {
-					console.log("-> getSettings ERROR");
-				}
-
-			}, function (error) {
-				console.log("-> getSettings ERROR");
-			});
-
-
-
-			FOURSQ.getPhoto("4d0fb8162d39a340637dc42b", access_token, function (data) {
-				var result = data.id;
-
-				try {
-					assert.equal(result, "4d0fb8162d39a340637dc42b");
-					console.log("-> getPhoto OK");
-				} catch (e) {
-					console.log("-> getPhoto ERROR");
-				}
-
-			}, function (error) {
-				console.log("-> getPhoto ERROR");
-			});
-
-
-			FOURSQ.getUser("self", access_token, function (data) {
-				var result = data;
-
-				try {
-					assert.ok(result);
-					console.log("-> getUser OK");
-				} catch (e) {
-					console.log("-> getUser ERROR");
-				}
-
-			}, function (error) {
-				console.log("-> getUser ERROR");
-			});
-
-			FOURSQ.getVenue(5104, access_token, function (data) {
-				var result = data.id;
-
-				try {
-					assert.equal(result, "40a55d80f964a52020f31ee3");
-					console.log("-> getVenue OK");
-				} catch (e) {
-					console.log("-> getVenue ERROR");
-				}
-
-			}, function (error) {
-				console.log("-> getVenue ERROR");
-			});
-
-			FOURSQ.getCheckin("IHR8THISVNU", access_token, function (data) {
-				var result = data;
-
-				try {
-					assert.ok(result);
-					console.log("-> getCheckin OK");
-				} catch (e) {
-					console.log("-> getCheckin ERROR");
-				}
-
-			}, function (error) {
-				console.log("-> getCheckin ERROR");
-			});
-
-			FOURSQ.getTip("4b5e662a70c603bba7d790b4", access_token, function (data) {
-				var result = data.id;
-
-				try {
-					assert.equal(result, "4b5e662a70c603bba7d790b4");
-					console.log("-> getTip OK");
-				} catch (e) {
-					console.log("-> getTip ERROR");
-				}
-
-			}, function (error) {
-				console.log("-> getTip ERROR");
-			});
-
+			testGetCheckin(access_token);
+			testGetTip(access_token);
 
 			res.send('Please check the console.');
 
