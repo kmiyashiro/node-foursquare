@@ -237,3 +237,12 @@ exports.getUser = function (user_id, access_token, success_handler, error_handle
 		extractData(status, result, "user", success_handler, error_handler);
 	});
 };
+
+exports.getUserCheckins = function (user_id, access_token, success_handler, error_handler) {
+
+	var url = API_URL + "/users/" + user_id + "/checkins";
+
+	getRequest(url, access_token, function (status, result) {
+		extractData(status, result, "checkins", success_handler, error_handler);
+	});
+};
