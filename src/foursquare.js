@@ -126,7 +126,7 @@ exports.getUserBadges = function (user_id, access_token, success_handler, error_
 	var url = API_URL + "/users/" + user_id + "/badges";
 
 	getRequest(url, access_token, function (status, result) {
-		extractData(status, result, "sets", success_handler, error_handler);
+		extractData(status, result, "badges", success_handler, error_handler);
 	});
 };
 
@@ -238,9 +238,15 @@ exports.getUser = function (user_id, access_token, success_handler, error_handle
 	});
 };
 
-exports.getUserCheckins = function (user_id, access_token, success_handler, error_handler) {
+exports.getUserCheckins = function (user_id, access_token, success_handler, error_handler, params) {
 
 	var url = API_URL + "/users/" + user_id + "/checkins";
+
+	var optional = QUERYSTRING.stringify(params || {});
+
+	if (optional !== "") {
+		url += "?" + optional;
+	}
 
 	getRequest(url, access_token, function (status, result) {
 		extractData(status, result, "checkins", success_handler, error_handler);

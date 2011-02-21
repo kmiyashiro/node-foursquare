@@ -13,6 +13,46 @@ var REDIRECT_URI = "http://distancebodza.com:30000/callback";
 
 // Test functions
 
+function testUserCheckins(access_token) {
+
+	var params = {
+		limit: 200
+	};
+
+	FOURSQ.getUserCheckins("self", access_token, function (data) {
+
+		var result = data.count;
+
+		try {
+			assert.notStrictEqual(result, undefined);
+			console.log("-> userCheckins OK");
+		} catch (e) {
+			console.log("-> userCheckins ERROR");
+		}
+
+	}, function (error) {
+			console.log("-> userCheckins ERROR");
+	}, params);
+}
+
+function testUserBadges(access_token) {
+
+	FOURSQ.getUserBadges("self", access_token, function (data) {
+
+		var result = data;
+
+		try {
+			assert.notStrictEqual(result, undefined);
+			console.log("-> userBadges OK");
+		} catch (e) {
+			console.log("-> userBadges ERROR");
+		}
+
+	}, function (error) {
+			console.log("-> userBadges ERROR");
+	});
+}
+
 function testUserSearch(access_token) {
 
 	var query = { twitter: "naveen" };
@@ -222,6 +262,8 @@ app.get('/callback', function (req, res) {
 
 		if (access_token !== undefined) {
 
+			testUserCheckins(access_token);
+			testUserBadges(access_token);
 			testTipSearch(access_token);
 			testUserSearch(access_token);
 			testVenueSearch(access_token);
