@@ -1,6 +1,6 @@
 {
    "name": "foursquareonnode",
-   "version": "0.0.1",
+   "version": "0.0.2",
    "description": "Foursquare on Node, Foursquare API v2 wrapper for Node JS.",
    "main": "foursquare.js",
    "keywords": [
