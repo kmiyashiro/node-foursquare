@@ -7,3 +7,7 @@ Install
 -------
 
  `npm install foursquareonnode`
+
+Use
+---
+
