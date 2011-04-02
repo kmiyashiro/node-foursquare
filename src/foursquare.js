@@ -229,6 +229,16 @@ exports.getVenue = function (venue_id, access_token, success_handler, error_hand
 	});
 };
 
+exports.getVenueTips = function (venue_id, access_token, success_handler, error_handler, params) {
+
+	var url = API_URL + "/venues/" + venue_id + '/tips';
+
+    url += "?" + QUERYSTRING.stringify(params || {});
+	getRequest(url, access_token, function (status, result) {
+		extractData(status, result, "tips", success_handler, error_handler);
+	});
+};
+
 exports.getUser = function (user_id, access_token, success_handler, error_handler) {
 
 	var url = API_URL + "/users/" + user_id;
