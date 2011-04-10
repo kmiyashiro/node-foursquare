@@ -8,6 +8,7 @@ var FOURSQ = require('./foursquare'),
 
 var CLIENT_ID = KEYS.CLIENT_ID;
 var CLIENT_SECRET = KEYS.CLIENT_SECRET;
+// var REDIRECT_URI = "http://localhost:30000/callback";
 var REDIRECT_URI = "http://distancebodza.com:30000/callback";
 
 
@@ -78,11 +79,11 @@ function testVenueSearch(access_token) {
 	var query = { ll: "40.7, -74" };
 
 	FOURSQ.searchVenues(query, access_token, function (data) {
-
+	    
 		var result = data[0].type;
 
 		try {
-			assert.equal(result, 'nearby');
+			assert.equal(result, 'trending');
 			console.log("-> searchVenue OK");
 		} catch (e) {
 			console.log("-> searchVenue ERROR");
@@ -204,6 +205,26 @@ function testGetVenue(access_token) {
 	});
 }
 
+function testGetVenueAspect(access_token) {
+
+	var venueId = '3fd66200f964a5206be61ee3';
+
+	FOURSQ.getVenueAspect(venueId, access_token, function (data) {
+		var result = data.items[0];
+
+		try {
+			assert.ok(result);
+			console.log("-> getVenueAspect OK");
+		} catch (e) {
+			console.log("-> getVenueAspect ERROR");
+		}
+
+	}, function (error) {
+		console.log(error);
+		console.log("-> getVenueAspect ERROR");
+	}, 'tips');
+}
+
 function testGetCheckin(access_token) {
 
 	FOURSQ.getCheckin("IHR8THISVNU", access_token, function (data) {
@@ -274,6 +295,7 @@ app.get('/callback', function (req, res) {
 
 			testGetUser(access_token);
 			testGetVenue(access_token);
+			testGetVenueAspect(access_token);
 
 			testGetCheckin(access_token);
 			testGetTip(access_token);

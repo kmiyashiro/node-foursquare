@@ -229,13 +229,13 @@ exports.getVenue = function (venue_id, access_token, success_handler, error_hand
 	});
 };
 
-exports.getVenueTips = function (venue_id, access_token, success_handler, error_handler, params) {
+exports.getVenueAspect = function (venue_id, access_token, success_handler, error_handler, aspect, params) {
 
-	var url = API_URL + "/venues/" + venue_id + '/tips';
+	var url = API_URL + "/venues/" + venue_id + '/' + aspect;
 
     url += "?" + QUERYSTRING.stringify(params || {});
 	getRequest(url, access_token, function (status, result) {
-		extractData(status, result, "tips", success_handler, error_handler);
+		extractData(status, result, aspect, success_handler, error_handler);
 	});
 };
 
