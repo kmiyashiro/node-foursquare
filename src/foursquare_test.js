@@ -79,7 +79,7 @@ function testVenueSearch(access_token) {
 	var query = { ll: "40.7, -74" };
 
 	FOURSQ.searchVenues(query, access_token, function (data) {
-	    
+
 		var result = data[0].type;
 
 		try {
@@ -310,7 +310,7 @@ app.get('/callback', function (req, res) {
 });
 
 app.get('/', function(req, res){
-    res.send('Hello Foursquare');
+    res.send('Foursquare on node, please <a href="/login">login</a> to run the tests');
 });
 
 
