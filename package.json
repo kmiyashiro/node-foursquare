@@ -1,0 +1,19 @@
+{
+  "name": "node-foursquare",
+  "description": "Fault-tolerant Foursquare API v2 wrapper for Node JS.",
+  "version": "0.0.1",
+  "main": "foursquare.js",
+  "keywords": ["node-foursquare", "foursquare", "4sq"],
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/clintandrewhall/node-foursquare"
+  },
+  "bugs" : {
+    "web" : "https://github.com/clintandrewhall/node-foursquare/issues"
+  },
+  "licenses" : [
+    { "type" : "MIT",
+      "url" : "http://github.com/clintandrewhall/node-foursquare/raw/master/LICENSE"
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+supervisor node ./test/node-foursquare-test.js

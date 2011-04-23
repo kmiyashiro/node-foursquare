@@ -1,13 +1,16 @@
-Foursquare on node
+node-foursquare
 ==================
 
-Foursquare API wrapper for Node JS.
-
-Install
--------
-
- `npm install foursquareonnode`
+Fault-tolerant Foursquare API wrapper for Node JS.
 
 Use
 ---
 
+
+
+Notes
+-----
+
+This project is a refactoring and enhancement of:
+
+https://github.com/yikulju/Foursquare-on-node
