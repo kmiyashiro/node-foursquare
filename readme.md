@@ -49,6 +49,7 @@ in Foursquare.  Using express, for example:
 
 All methods within the module require the Access Token from the callback.
 
+For more details and examples, take a look at the test oracle in the /test directory.
 
 Testing
 -------
@@ -68,9 +69,15 @@ Then, simply invoke the test.js file with Node.JS:
 After a redirect and authorization, you'll be see test results in the console window.
 
 
+Documentation
+-------------
+
+Detailed documentation is available in the /docs directory.
+
 Notes
 -----
 
-This project is a refactoring and enhancement of:
+This module is a read-only subset of the full Foursquare API, but further capability, (adding, posting, updating, etc),
+is forthcoming. Bugs and Pull Requests are, of course, accepted! :-)
 
-https://github.com/yikulju/Foursquare-on-node
+This project is a refactoring and enhancement of: https://github.com/yikulju/Foursquare-on-node
