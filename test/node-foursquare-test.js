@@ -404,24 +404,24 @@ app.get('/login', function(req, res) {
 	res.end();
 });
 
-app.get('/callback', function (req, res) {
+  app.get('/callback', function (req, res) {
 
-	var code = req.query.code;
+    var code = req.query.code;
 
-	Foursquare.getAccessToken({
-		code: code,
-		redirect_uri: config.redirectUrl,
-		client_id: config.clientId,
-		client_secret: config.clientSecret
-	}, function (error, accessToken) {
-    if(error) {
-      res.send("An error was thrown: " + error.message);
-    }
-    else {
-      res.redirect("/test?token=" + accessToken);
-    }
-	});
-});
+    Foursquare.getAccessToken({
+      code: code,
+      redirect_uri: config.redirectUrl,
+      client_id: config.clientId,
+      client_secret: config.clientSecret
+    }, function (error, accessToken) {
+      if(error) {
+        res.send("An error was thrown: " + error.message);
+      }
+      else {
+        res.redirect("/test?token=" + accessToken);
+      }
+    });
+  });
 
 app.get("/test", function(req, res) {
   var accessToken = req.query.token;
