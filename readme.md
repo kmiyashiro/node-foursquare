@@ -51,6 +51,22 @@ All methods within the module require the Access Token from the callback.
 
 For more details and examples, take a look at the test oracle in the /test directory.
 
+Logging
+-------
+
+This module uses Log4js to log events. I highly recommend you add the following log4js.json file to your project:
+
+    {
+      "appenders": [{
+        "type" : "console"
+      }],
+      "levels" : {
+        "node-foursquare" : "OFF"
+      }
+    }
+
+For more information, visit: https://github.com/csausdev/log4js-node
+
 Testing
 -------
 

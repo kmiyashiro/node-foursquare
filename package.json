@@ -22,16 +22,16 @@
     }
   ],
   "dependencies": {
-    "express": "~2.2",
     "log4js": "~0.2"
   },
   "engines": {
-    "node": "~4"
+    "node": "~0.4"
   },
   "homepage": "https://github.com/clintandrewhall/node-foursquare",
   "author": "Clint Andrew Hall (http://www.clintandrewhall.com)",
   "directories": {
-    "lib": "."
+    "lib": "./lib",
+    "doc": "./doc"
   },
   "scripts": {
     "test": "node test.js"
