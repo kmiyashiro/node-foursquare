@@ -15,5 +15,9 @@
     { "type" : "MIT",
       "url" : "http://github.com/clintandrewhall/node-foursquare/raw/master/LICENSE"
     }
-  ]
+  ],
+  "dependencies" : {
+    "express" : "~2.2",
+    "log4js" : "~0.2"
+  }
 }

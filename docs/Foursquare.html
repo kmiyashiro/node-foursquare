@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>JSDoc: Namespace: Foursquare</title>
+	
+	<script src="http://shjs.sourceforge.net/sh_main.min.js"> </script>
+    <script src="http://shjs.sourceforge.net/lang/sh_javascript.min.js"> </script>
+    
+    <link type="text/css" rel="stylesheet" href="styles/node-dark.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+
+</head>
+
+<body>
+
+<div id="main">
+
+<h1 class="page-title">Namespace: Foursquare</h1>
+
+
+
+<section>
+ 
+<header>
+    <h2>Foursquare</h2>
+</header>  
+
+<article>    
+    <dl class="details">
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt>Source:</dt>
+	<dd>./lib/node-foursquare.js, line 24</dd>
+	
+	
+	
+</dl>
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        <h3 class="subsection-title">Namespaces</h3>
+        
+        <dl>
+            <dt><a href="namespaces.html#Foursquare.Checkins"><a href="Foursquare.Checkins.html">Checkins</a></a></dt>
+            <dd></dd>
+        
+            <dt><a href="namespaces.html#Foursquare.Photos"><a href="Foursquare.Photos.html">Photos</a></a></dt>
+            <dd></dd>
+        
+            <dt><a href="namespaces.html#Foursquare.Settings"><a href="Foursquare.Settings.html">Settings</a></a></dt>
+            <dd></dd>
+        
+            <dt><a href="namespaces.html#Foursquare.Specials"><a href="Foursquare.Specials.html">Specials</a></a></dt>
+            <dd></dd>
+        
+            <dt><a href="namespaces.html#Foursquare.Tips"><a href="Foursquare.Tips.html">Tips</a></a></dt>
+            <dd></dd>
+        
+            <dt><a href="namespaces.html#Foursquare.Users"><a href="Foursquare.Users.html">Users</a></a></dt>
+            <dd></dd>
+        
+            <dt><a href="namespaces.html#Foursquare.Venues"><a href="Foursquare.Venues.html">Venues</a></a></dt>
+            <dd></dd>
+        </dl>
+        
+    
+    
+    
+    
+    
+        
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+<dt id="Foursquare.getAccessToken">
+    <h4 class="name" id="getAccessToken"><span class="type-signature">&lt;static> </span>getAccessToken(params, callback)<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Exchange a user authorization code for an access token.
+    </p>
+    
+    
+    <dl class="details">
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt>Source:</dt>
+	<dd>./lib/node-foursquare.js, line 185</dd>
+	
+	
+	
+	<dt>See:</dt>
+	<dd>
+        <ul><li>https://developer.foursquare.com/docs/oauth.html</li></ul>
+	</dd>
+	
+</dl>
+    
+    
+    
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+            
+            <td class="type">
+            Object
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">A collection of parameters for the Access Token request.<h6>Properties</h6>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		<th>Default</th>
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>code</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+                <td class="attributes">
+                
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">The code provided by Foursquare as the result of the user redirect.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>redirect_uri</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+                <td class="attributes">
+                
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">The URL to redirect to after the code is exchanged for a token.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>client_id</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+                <td class="attributes">
+                
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">The Client ID provided by Foursquare.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>client_secret</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+                <td class="attributes">
+                
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">The Client Secret provided by Foursquare.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>grant_type</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+                <td class="attributes">
+                &lt;optional><br>
+                </td>
+            
+            
+            
+                <td class="default">
+                "authorization_code"
+                </td>
+            
+            
+            <td class="description last">The type of authorization to request.</td>
+        </tr>
+	
+	
+	</tbody>
+</table></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            Function
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The function to call with results, function({Error} error, {Object} results).</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+    
+    
+    
+     
+    
+
+</dd>
+<dt id="Foursquare.getAuthClientRedirectUrl">
+    <h4 class="name" id="getAuthClientRedirectUrl"><span class="type-signature">&lt;static> </span>getAuthClientRedirectUrl(clientId, redirectUrl)<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Build and return an appropriate Authorization URL where the user can grant permission to the application.
+    </p>
+    
+    
+    <dl class="details">
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt>Source:</dt>
+	<dd>./lib/node-foursquare.js, line 219</dd>
+	
+	
+	
+</dl>
+    
+    
+    
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>clientId</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The Client ID provided by Foursquare</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>redirectUrl</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The URL to redirect to after authorization is granted.</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+    
+    
+    
+     
+    
+
+</dd></dl>
+        
+    
+    
+    
+</article>
+
+</section>  
+
+</div>
+<nav>
+    <h3>Modules</h3><ul><li><a href="module_node-foursquare.html">node-foursquare</a></li></ul><h3>Namespaces</h3><ul><li><a href="Foursquare.html">Foursquare</a></li><li><a href="Foursquare.Checkins.html">Checkins</a></li><li><a href="Foursquare.Photos.html">Photos</a></li><li><a href="Foursquare.Settings.html">Settings</a></li><li><a href="Foursquare.Specials.html">Specials</a></li><li><a href="Foursquare.Tips.html">Tips</a></li><li><a href="Foursquare.Users.html">Users</a></li><li><a href="Foursquare.Venues.html">Venues</a></li></ul>
+</nav>
+<br clear="both">
+<footer>
+    Documentation generated by JSDoc 3 on Sat Apr 23 2011 20:38:05 GMT-0500 (CDT)
+</footer>
+<script> sh_highlightDocument(); </script>
+
+</body>
+</html>

@@ -1,0 +1,1843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>JSDoc: Namespace: Users</title>
+	
+	<script src="http://shjs.sourceforge.net/sh_main.min.js"> </script>
+    <script src="http://shjs.sourceforge.net/lang/sh_javascript.min.js"> </script>
+    
+    <link type="text/css" rel="stylesheet" href="styles/node-dark.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+
+</head>
+
+<body>
+
+<div id="main">
+
+<h1 class="page-title">Namespace: Users</h1>
+
+
+
+<section>
+ 
+<header>
+    <h2><span class="ancestors"><a href="Foursquare.html">Foursquare</a></span> » Users</h2>
+</header>  
+
+<article>    
+    <dl class="details">
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt>Source:</dt>
+	<dd>./lib/node-foursquare.js, line 27</dd>
+	
+	
+	
+</dl>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+<dt id="Foursquare.Users.getBadges">
+    <h4 class="name" id="getBadges"><span class="type-signature">&lt;static> </span>getBadges([userId], [field], accessToken, callback)<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Retrieve a list of badges.
+    </p>
+    
+    
+    <dl class="details">
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt>Source:</dt>
+	<dd>./lib/node-foursquare.js, line 290</dd>
+	
+	
+	
+	<dt>See:</dt>
+	<dd>
+        <ul><li>https://developer.foursquare.com/docs/users/badges.html</li></ul>
+	</dd>
+	
+</dl>
+    
+    
+    
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		<th>Default</th>
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>userId</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+                <td class="attributes">
+                &lt;optional><br>
+                </td>
+            
+            
+            
+                <td class="default">
+                "self"
+                </td>
+            
+            
+            <td class="description last">The id of the user.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>field</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+                <td class="attributes">
+                &lt;optional><br>
+                </td>
+            
+            
+            
+                <td class="default">
+                "badges"
+                </td>
+            
+            
+            <td class="description last">The field to return from the JSON response. Refer to the documentation for the
+specific aspect for details.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+                <td class="attributes">
+                
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">The access token provided by Foursquare for the current user.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            Function
+            </td>
+            
+            
+                <td class="attributes">
+                
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">The function to call with results, function({Error} error, {Object} results).</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+    
+    
+    
+     
+    
+
+</dd>
+<dt id="Foursquare.Users.getCheckins">
+    <h4 class="name" id="getCheckins"><span class="type-signature">&lt;static> </span>getCheckins([userId], accessToken, [params], callback)<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Retrieve Check-ins for a Foursquare User.
+    </p>
+    
+    
+    <dl class="details">
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt>Source:</dt>
+	<dd>./lib/node-foursquare.js, line 307</dd>
+	
+	
+	
+	<dt>See:</dt>
+	<dd>
+        <ul><li>https://developer.foursquare.com/docs/users/checkins.html</li></ul>
+	</dd>
+	
+</dl>
+    
+    
+    
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		<th>Default</th>
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>userId</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+                <td class="attributes">
+                &lt;optional><br>
+                </td>
+            
+            
+            
+                <td class="default">
+                "self"
+                </td>
+            
+            
+            <td class="description last">The id of the user.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+                <td class="attributes">
+                
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">The access token provided by Foursquare for the current user.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+            
+            <td class="type">
+            Object
+            </td>
+            
+            
+                <td class="attributes">
+                &lt;optional><br>
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">An object containing additional parameters. Refer to Foursquare documentation for details
+on currently supported parameters.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            Function
+            </td>
+            
+            
+                <td class="attributes">
+                
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">The function to call with results, function({Error} error, {Object} results).</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+    
+    
+    
+     
+    
+
+</dd>
+<dt id="Foursquare.Users.getFriends">
+    <h4 class="name" id="getFriends"><span class="type-signature">&lt;static> </span>getFriends([userId], accessToken, [params], callback)<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Retrieve Friends for a Foursquare User.
+    </p>
+    
+    
+    <dl class="details">
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt>Source:</dt>
+	<dd>./lib/node-foursquare.js, line 323</dd>
+	
+	
+	
+	<dt>See:</dt>
+	<dd>
+        <ul><li>https://developer.foursquare.com/docs/users/friends.html</li></ul>
+	</dd>
+	
+</dl>
+    
+    
+    
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		<th>Default</th>
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>userId</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+                <td class="attributes">
+                &lt;optional><br>
+                </td>
+            
+            
+            
+                <td class="default">
+                "self"
+                </td>
+            
+            
+            <td class="description last">The id of the user.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+                <td class="attributes">
+                
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">The access token provided by Foursquare for the current user.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+            
+            <td class="type">
+            Object
+            </td>
+            
+            
+                <td class="attributes">
+                &lt;optional><br>
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">An object containing additional parameters. Refer to Foursquare documentation for details
+on currently supported parameters.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            Function
+            </td>
+            
+            
+                <td class="attributes">
+                
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">The function to call with results, function({Error} error, {Object} results).</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+    
+    
+    
+     
+    
+
+</dd>
+<dt id="Foursquare.Users.getTips">
+    <h4 class="name" id="getTips"><span class="type-signature">&lt;static> </span>getTips([userId], accessToken, [params], callback)<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Retrieve Tips for a Foursquare User.
+    </p>
+    
+    
+    <dl class="details">
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt>Source:</dt>
+	<dd>./lib/node-foursquare.js, line 339</dd>
+	
+	
+	
+	<dt>See:</dt>
+	<dd>
+        <ul><li>https://developer.foursquare.com/docs/users/tips.html</li></ul>
+	</dd>
+	
+</dl>
+    
+    
+    
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		<th>Default</th>
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>userId</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+                <td class="attributes">
+                &lt;optional><br>
+                </td>
+            
+            
+            
+                <td class="default">
+                "self"
+                </td>
+            
+            
+            <td class="description last">The id of the user.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+                <td class="attributes">
+                
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">The access token provided by Foursquare for the current user.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+            
+            <td class="type">
+            Object
+            </td>
+            
+            
+                <td class="attributes">
+                &lt;optional><br>
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">An object containing additional parameters. Refer to Foursquare documentation for details
+on currently supported parameters.<h6>Properties</h6>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>lat</code></td>
+            
+            
+            <td class="type">
+            String | Number
+            </td>
+            
+            
+                <td class="attributes">
+                &lt;optional><br>
+                </td>
+            
+            
+            
+            
+            <td class="description last">The latitude of the location around which to search.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>lng</code></td>
+            
+            
+            <td class="type">
+            String | Number
+            </td>
+            
+            
+                <td class="attributes">
+                &lt;optional><br>
+                </td>
+            
+            
+            
+            
+            <td class="description last">The longitude of the location around which to search.</td>
+        </tr>
+	
+	
+	</tbody>
+</table></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            Function
+            </td>
+            
+            
+                <td class="attributes">
+                
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">The function to call with results, function({Error} error, {Object} results).</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+    
+    
+    
+     
+    
+
+</dd>
+<dt id="Foursquare.Users.getTodos">
+    <h4 class="name" id="getTodos"><span class="type-signature">&lt;static> </span>getTodos([userId], accessToken, [params], callback)<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Retrieve Todos for a Foursquare User.
+    </p>
+    
+    
+    <dl class="details">
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt>Source:</dt>
+	<dd>./lib/node-foursquare.js, line 357</dd>
+	
+	
+	
+	<dt>See:</dt>
+	<dd>
+        <ul><li>https://developer.foursquare.com/docs/users/todos.html</li></ul>
+	</dd>
+	
+</dl>
+    
+    
+    
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		<th>Default</th>
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>userId</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+                <td class="attributes">
+                &lt;optional><br>
+                </td>
+            
+            
+            
+                <td class="default">
+                "self"
+                </td>
+            
+            
+            <td class="description last">The id of the user.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+                <td class="attributes">
+                
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">The access token provided by Foursquare for the current user.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+            
+            <td class="type">
+            Object
+            </td>
+            
+            
+                <td class="attributes">
+                &lt;optional><br>
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">An object containing additional parameters. Refer to Foursquare documentation for details
+on currently supported parameters.<h6>Properties</h6>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>lat</code></td>
+            
+            
+            <td class="type">
+            String | Number
+            </td>
+            
+            
+                <td class="attributes">
+                &lt;optional><br>
+                </td>
+            
+            
+            
+            
+            <td class="description last">The latitude of the location around which to search.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>lng</code></td>
+            
+            
+            <td class="type">
+            String | Number
+            </td>
+            
+            
+                <td class="attributes">
+                &lt;optional><br>
+                </td>
+            
+            
+            
+            
+            <td class="description last">The longitude of the location around which to search.</td>
+        </tr>
+	
+	
+	</tbody>
+</table></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            Function
+            </td>
+            
+            
+                <td class="attributes">
+                
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">The function to call with results, function({Error} error, {Object} results).</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+    
+    
+    
+     
+    
+
+</dd>
+<dt id="Foursquare.Users.getUser">
+    <h4 class="name" id="getUser"><span class="type-signature">&lt;static> </span>getUser(userId, accessToken, callback)<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Retrieve a Foursquare User.
+    </p>
+    
+    
+    <dl class="details">
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt>Source:</dt>
+	<dd>./lib/node-foursquare.js, line 247</dd>
+	
+	
+	
+	<dt>See:</dt>
+	<dd>
+        <ul><li>https://developer.foursquare.com/docs/users/users.html</li></ul>
+	</dd>
+	
+</dl>
+    
+    
+    
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>userId</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The id of the User to retreive.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The access token provided by Foursquare for the current user.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            Function
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The function to call with results, function({Error} error, {Object} results).</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+    
+    
+    
+     
+    
+
+</dd>
+<dt id="Foursquare.Users.getUserAspect">
+    <h4 class="name" id="getUserAspect"><span class="type-signature">&lt;static> </span>getUserAspect([userId], aspect, [field], accessToken, [params], callback)<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    
+    <dl class="details">
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt>Source:</dt>
+	<dd>./lib/node-foursquare.js, line 265</dd>
+	
+	
+	
+	<dt>See:</dt>
+	<dd>
+        <ul><li>https://developer.foursquare.com/docs/index_docs.html</li></ul>
+	</dd>
+	
+</dl>
+    
+    
+    
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		<th>Default</th>
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>userId</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+                <td class="attributes">
+                &lt;optional><br>
+                </td>
+            
+            
+            
+                <td class="default">
+                "self"
+                </td>
+            
+            
+            <td class="description last">The id of the User to retreive.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>aspect</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+                <td class="attributes">
+                
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">The aspect to retrieve. Refer to Foursquare documentation for details on currently
+supported aspects.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>field</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+                <td class="attributes">
+                &lt;optional><br>
+                </td>
+            
+            
+            
+                <td class="default">
+                aspect
+                </td>
+            
+            
+            <td class="description last">The field to return from the JSON response. Refer to the documentation for the
+specific aspect for details.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+                <td class="attributes">
+                
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">The access token provided by Foursquare for the current user.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+            
+            <td class="type">
+            Object
+            </td>
+            
+            
+                <td class="attributes">
+                &lt;optional><br>
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">An object containing additional parameters. Refer to Foursquare documentation for details
+on currently supported parameters.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            Function
+            </td>
+            
+            
+                <td class="attributes">
+                
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">The function to call with results, function({Error} error, {Object} results).</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+    
+    
+    
+     
+    
+
+</dd>
+<dt id="Foursquare.Users.getVenueHistory">
+    <h4 class="name" id="getVenueHistory"><span class="type-signature">&lt;static> </span>getVenueHistory([userId], accessToken, [params], callback)<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Retrieve Venues visited by a Foursquare User.
+    </p>
+    
+    
+    <dl class="details">
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt>Source:</dt>
+	<dd>./lib/node-foursquare.js, line 377</dd>
+	
+	
+	
+	<dt>See:</dt>
+	<dd>
+        <ul><li>https://developer.foursquare.com/docs/users/venuehistory.html</li></ul>
+	</dd>
+	
+</dl>
+    
+    
+    
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		<th>Default</th>
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>userId</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+                <td class="attributes">
+                &lt;optional><br>
+                </td>
+            
+            
+            
+                <td class="default">
+                "self"
+                </td>
+            
+            
+            <td class="description last">The id of the user.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+                <td class="attributes">
+                
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">The access token provided by Foursquare for the current user.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+            
+            <td class="type">
+            Object
+            </td>
+            
+            
+                <td class="attributes">
+                &lt;optional><br>
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">An object containing additional parameters. Refer to Foursquare documentation for details
+on currently supported parameters.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            Function
+            </td>
+            
+            
+                <td class="attributes">
+                
+                </td>
+            
+            
+            
+                <td class="default">
+                
+                </td>
+            
+            
+            <td class="description last">The function to call with results, function({Error} error, {Object} results).</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+    
+    
+    
+     
+    
+
+</dd>
+<dt id="Foursquare.Users.search">
+    <h4 class="name" id="search"><span class="type-signature">&lt;static> </span>search([params], accessToken, callback)<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Find Foursquare Users.
+    </p>
+    
+    
+    <dl class="details">
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt>Source:</dt>
+	<dd>./lib/node-foursquare.js, line 232</dd>
+	
+	
+	
+	<dt>See:</dt>
+	<dd>
+        <ul><li>https://developer.foursquare.com/docs/users/search.html</li></ul>
+	</dd>
+	
+</dl>
+    
+    
+    
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+            
+            <td class="type">
+            Object
+            </td>
+            
+            
+                <td class="attributes">
+                &lt;optional><br>
+                </td>
+            
+            
+            
+            
+            <td class="description last">An object containing additional parameters. Refer to Foursquare documentation for details
+on currently supported parameters.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+                <td class="attributes">
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">The access token provided by Foursquare for the current user.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            Function
+            </td>
+            
+            
+                <td class="attributes">
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">The function to call with results, function({Error} error, {Object} results).</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+    
+    
+    
+     
+    
+
+</dd></dl>
+        
+    
+    
+    
+</article>
+
+</section>  
+
+</div>
+<nav>
+    <h3>Modules</h3><ul><li><a href="module_node-foursquare.html">node-foursquare</a></li></ul><h3>Namespaces</h3><ul><li><a href="Foursquare.html">Foursquare</a></li><li><a href="Foursquare.Checkins.html">Checkins</a></li><li><a href="Foursquare.Photos.html">Photos</a></li><li><a href="Foursquare.Settings.html">Settings</a></li><li><a href="Foursquare.Specials.html">Specials</a></li><li><a href="Foursquare.Tips.html">Tips</a></li><li><a href="Foursquare.Users.html">Users</a></li><li><a href="Foursquare.Venues.html">Venues</a></li></ul>
+</nav>
+<br clear="both">
+<footer>
+    Documentation generated by JSDoc 3 on Sat Apr 23 2011 20:38:05 GMT-0500 (CDT)
+</footer>
+<script> sh_highlightDocument(); </script>
+
+</body>
+</html>
