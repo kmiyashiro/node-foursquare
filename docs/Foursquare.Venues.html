@@ -44,7 +44,7 @@
 	
 	
 	<dt>Source:</dt>
-	<dd>./lib/node-foursquare.js, line 27</dd>
+	<dd>lib/node-foursquare.js, line 31</dd>
 	
 	
 	
@@ -95,7 +95,7 @@
 	
 	
 	<dt>Source:</dt>
-	<dd>./lib/node-foursquare.js, line 454</dd>
+	<dd>lib/node-foursquare.js, line 476</dd>
 	
 	
 	
@@ -262,7 +262,7 @@ on currently supported parameters.</td>
 	
 	
 	<dt>Source:</dt>
-	<dd>./lib/node-foursquare.js, line 506</dd>
+	<dd>lib/node-foursquare.js, line 528</dd>
 	
 	
 	
@@ -429,7 +429,7 @@ on currently supported parameters.</td>
 	
 	
 	<dt>Source:</dt>
-	<dd>./lib/node-foursquare.js, line 486</dd>
+	<dd>lib/node-foursquare.js, line 508</dd>
 	
 	
 	
@@ -641,7 +641,7 @@ on currently supported parameters.</td>
 	
 	
 	<dt>Source:</dt>
-	<dd>./lib/node-foursquare.js, line 470</dd>
+	<dd>lib/node-foursquare.js, line 492</dd>
 	
 	
 	
@@ -808,7 +808,7 @@ on currently supported parameters.</td>
 	
 	
 	<dt>Source:</dt>
-	<dd>./lib/node-foursquare.js, line 410</dd>
+	<dd>lib/node-foursquare.js, line 432</dd>
 	
 	
 	
@@ -948,7 +948,7 @@ on currently supported parameters.</td>
 	
 	
 	<dt>Source:</dt>
-	<dd>./lib/node-foursquare.js, line 428</dd>
+	<dd>lib/node-foursquare.js, line 450</dd>
 	
 	
 	
@@ -1138,13 +1138,226 @@ on currently supported parameters.</td>
 	
 	
 	<dt>Source:</dt>
-	<dd>./lib/node-foursquare.js, line 393</dd>
+	<dd>lib/node-foursquare.js, line 397</dd>
 	
 	
 	
 	<dt>See:</dt>
 	<dd>
         <ul><li>https://developer.foursquare.com/docs/venues/search.html</li></ul>
+	</dd>
+	
+</dl>
+    
+    
+    
+    <h5>Parameters:</h5>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+            
+            <td class="type">
+            Object
+            </td>
+            
+            
+                <td class="attributes">
+                &lt;optional><br>
+                </td>
+            
+            
+            
+            
+            <td class="description last">An object containing additional parameters. Refer to Foursquare documentation for details
+on currently supported parameters.<h6>Properties</h6>
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>lat</code></td>
+            
+            
+            <td class="type">
+            String | Number
+            </td>
+            
+            
+                <td class="attributes">
+                &lt;optional><br>
+                </td>
+            
+            
+            
+            
+            <td class="description last">The latitude of the location around which to search.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>lng</code></td>
+            
+            
+            <td class="type">
+            String | Number
+            </td>
+            
+            
+                <td class="attributes">
+                &lt;optional><br>
+                </td>
+            
+            
+            
+            
+            <td class="description last">The longitude of the location around which to search.</td>
+        </tr>
+	
+	
+	</tbody>
+</table></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+            
+            <td class="type">
+            String
+            </td>
+            
+            
+                <td class="attributes">
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">The access token provided by Foursquare for the current user.</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+            
+            <td class="type">
+            Function
+            </td>
+            
+            
+                <td class="attributes">
+                
+                </td>
+            
+            
+            
+            
+            <td class="description last">The function to call with results, function({Error} error, {Object} results).</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+    
+    
+    
+     
+    
+
+</dd>
+<dt id="Foursquare.Venues.search">
+    <h4 class="name" id="search"><span class="type-signature">&lt;static> </span>search([params], accessToken, callback)<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Return Foursquare Venues near location with the most people currently checked in.
+    </p>
+    
+    
+    <dl class="details">
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt>Source:</dt>
+	<dd>lib/node-foursquare.js, line 414</dd>
+	
+	
+	
+	<dt>See:</dt>
+	<dd>
+        <ul><li>https://developer.foursquare.com/docs/venues/trending.html</li></ul>
 	</dd>
 	
 </dl>
@@ -1335,7 +1548,7 @@ on currently supported parameters.<h6>Properties</h6>
 </nav>
 <br clear="both">
 <footer>
-    Documentation generated by JSDoc 3 on Sat Apr 23 2011 20:38:05 GMT-0500 (CDT)
+    Documentation generated by JSDoc 3 on Thu May 05 2011 10:13:54 GMT-0500 (CDT)
 </footer>
 <script> sh_highlightDocument(); </script>
 
