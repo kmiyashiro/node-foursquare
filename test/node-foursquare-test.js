@@ -186,6 +186,25 @@ function TestSuite(accessToken) {
     });
   };
 
+  Tests.Venues.trending = function() {
+    var query = { "lat": "40.7", "lng" : "-74" };
+    Foursquare.Venues.trending(query, accessToken, function (error, data) {
+      if(error) {
+        logger.error("Foursquare.Venues.trending \033[22;31mERROR: " + error.message);
+      }
+      else {
+        try {
+          logger.trace(sys.inspect(data));
+          assert.ok(data[0].hereNow.count > 0);
+          logger.info("Foursquare.Venues.trending(lat: 40.7, lng: -74) : \033[22;32mOK");
+        } catch (error) {
+          logger.error("Foursquare.Venues.trending \033[22;31mERROR: " + error.message);
+        }
+      }
+    });
+  };
+
+
   Tests.Venues.getVenue = function() {
     Foursquare.Venues.getVenue(5104, accessToken, function (error, data) {
       if(error) {
