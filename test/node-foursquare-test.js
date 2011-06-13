@@ -3,8 +3,17 @@ var sys = require('sys'),
 	assert = require('assert'),
   logger = require("log4js")().getLogger("node-foursquare-test");
 
-var Foursquare = require('./../lib/node-foursquare').Foursquare(),
-	config = require('./config').config;
+var Foursquare = require('./../lib/node-foursquare')(),
+	config = require('./config').config,
+  core = require("./../lib/core")(config);
+
+function reportError(test, message) {
+  logger.error(test + " :  \033[22;31mERROR: " + message + "\x1B[0m");
+}
+
+function ok(test) {
+  logger.info(test + " : \033[22;32mOK\x1B[0m");
+}
 
 function TestSuite(accessToken) {
   var Tests = {
@@ -18,377 +27,480 @@ function TestSuite(accessToken) {
   };
 
   Tests.Users.search = function() {
-    var params = { "twitter": "clintandrewhall" };
+    var params = { "twitter": "naveen" }, test = "Foursquare.Users.search(twitter=naveen)";
     Foursquare.Users.search(params, accessToken, function(error, data) {
       if(error) {
-        logger.error("Foursquare.Users.search(twitter=clintandrewhall) \033[22;31mERROR: " + error.message);
+        reportError(test, error.message);
       }
       else {
         try {
           logger.trace(sys.inspect(data));
-          assert.equal(data[0].id, "62243");
-          logger.info("Foursquare.Users.search(twitter=clintandrewhall) : \033[22;32mOK");
+          assert.ok(data.results);
+          assert.equal(data.results[0].id, "33");
+          assert.equal(data.results[0].firstName, "Naveen");
+          ok(test);
         } catch (error) {
-          logger.error("Foursquare.Users.search(twitter=clintandrewhall) \033[22;31mERROR: " + error.message);
+          reportError(test, error);
+        }
+      }
+    });
+  };
+
+  Tests.Users.getLeaderboard = function() {
+    var test = "Foursquare.Users.getLeaderboard";
+    Foursquare.Users.getLeaderboard({}, accessToken, function (error, data) {
+      if(error) {
+        reportError(test, error.message);
+      }
+      else {
+        try {
+          logger.trace(sys.inspect(data));
+          assert.ok(data.leaderboard);
+          assert.ok(data.leaderboard.count >= 0);
+          assert.ok(data.leaderboard.items);
+          ok(test);
+        } catch (error) {
+          reportError(test, error);
         }
       }
     });
   };
 
   Tests.Users.getUser = function() {
+    var test = "Foursquare.Users.getUser(self)";
     Foursquare.Users.getUser("self", accessToken, function (error, data) {
       if(error) {
-        logger.error("Foursquare.Users.getUser \033[22;31mERROR: " + error.message);
+        reportError(test, error.message);
       }
       else {
         try {
           logger.trace(sys.inspect(data));
-          assert.ok(data);
-          logger.info("Foursquare.Users.getUser(self) : \033[22;32mOK");
+          assert.ok(data.user);
+          assert.ok(data.user.id);
+          assert.ok(data.user.firstName);
+          ok(test);
         } catch (error) {
-          logger.error("Foursquare.Users.getUser \033[22;31mERROR: " + error.message);
+          reportError(test, error);
         }
       }
     });
-    Foursquare.Users.getUser("62243", accessToken, function (error, data) {
+    Foursquare.Users.getUser("33", accessToken, function (error, data) {
+      var test = "Foursquare.Users.getUser(33)";
       if(error) {
-        logger.error("Foursquare.Users.getUser \033[22;31mERROR: " + error.message);
+        reportError(test, error.message);
       }
       else {
         try {
           logger.trace(sys.inspect(data));
-          assert.equal(data.id, "62243");
-          logger.info("Foursquare.Users.getUser(62243) : \033[22;32mOK");
+          assert.ok(data.user);
+          assert.equal(data.user.id, "33");
+          assert.equal(data.user.firstName, "Naveen");
+          ok(test);
         } catch (error) {
-          logger.error("Foursquare.Users.getUser \033[22;31mERROR: " + error.message);
+          reportError(test, error);
         }
       }
     });
   };
 
   Tests.Users.getBadges = function() {
+    var test = "Foursquare.Users.getBadges(self)";
     Foursquare.Users.getBadges(null, null, accessToken, function (error, data) {
       if(error) {
-        logger.error("Foursquare.Users.getBadges \033[22;31mERROR: " + error.message);
+        reportError(test, error.message);
       }
       else {
         try {
           logger.trace(sys.inspect(data));
-          assert.ok(data);
-          logger.info("Foursquare.Users.getBadges(self) : \033[22;32mOK");
+          assert.ok(data.badges);
+          ok(test);
         } catch (error) {
-          logger.error("Foursquare.Users.getBadges \033[22;31mERROR: " + error.message);
+          reportError(test, error);
         }
       }
     });
   };
 
   Tests.Users.getCheckins = function() {
-    Foursquare.Users.getCheckins(null, accessToken, null, function (error, data) {
+    var test = "Foursquare.Users.getCheckins(self)";
+    Foursquare.Users.getCheckins(null, null, accessToken, function (error, data) {
       if(error) {
-        logger.error("Foursquare.Users.getCheckins \033[22;31mERROR: " + error.message);
+        reportError(test, error);
       }
       else {
         try {
           logger.trace(sys.inspect(data));
-          assert.ok(data);
-          logger.info("Foursquare.Users.getCheckins(self) : \033[22;32mOK");
+          assert.ok(data.checkins);
+          assert.ok(data.checkins.count >= 0);
+          assert.ok(data.checkins.items);
+          ok(test);
         } catch (error) {
-          logger.error("Foursquare.Users.getCheckins \033[22;31mERROR: " + error.message);
+          reportError(test, error);
         }
       }
     });
   };
 
   Tests.Users.getFriends = function() {
-    Foursquare.Users.getFriends(null, accessToken, null, function (error, data) {
+    var test = "Foursquare.Users.getFriends(self)";
+    Foursquare.Users.getFriends(null, null, accessToken, function (error, data) {
       if(error) {
-        logger.error("Foursquare.Users.getFriends \033[22;31mERROR: " + error.message);
+        reportError(test, error.message);
       }
       else {
         try {
           logger.trace(sys.inspect(data));
-          assert.ok(data);
-          logger.info("Foursquare.Users.getFriends(self) : \033[22;32mOK");
+          assert.ok(data.friends);
+          assert.ok(data.friends.count >= 0);
+          assert.ok(data.friends.items);
+          ok(test);
         } catch (error) {
-          logger.error("Foursquare.Users.getFriends \033[22;31mERROR: " + error.message);
+          reportError(test, error);
         }
       }
     });
   };
 
   Tests.Users.getTips = function() {
-    Foursquare.Users.getTips(null, accessToken, null, function (error, data) {
+    var test = "Foursquare.Users.getTips(self)";
+    Foursquare.Users.getTips(null, null, accessToken, function (error, data) {
       if(error) {
-        logger.error("Foursquare.Users.getTips \033[22;31mERROR: " + error.message);
+        reportError(test, error.message);
       }
       else {
         try {
           logger.trace(sys.inspect(data));
-          assert.ok(data);
-          logger.info("Foursquare.Users.getTips(self) : \033[22;32mOK");
+          assert.ok(data.tips);
+          assert.ok(data.tips.count >= 0);
+          assert.ok(data.tips.items);
+          ok(test);
         } catch (error) {
-          logger.error("Foursquare.Users.getTips \033[22;31mERROR: " + error.message);
+          reportError(test, error);
         }
       }
     });
   };
 
   Tests.Users.getTodos = function() {
-    Foursquare.Users.getTodos(null, accessToken, null, function (error, data) {
+    var test = "Foursquare.Users.getTodos(self)";
+    Foursquare.Users.getTodos(null, null, accessToken, function (error, data) {
       if(error) {
-        logger.error("Foursquare.Users.getTodos \033[22;31mERROR: " + error.message);
+        reportError(test, error.message);
       }
       else {
         try {
           logger.trace(sys.inspect(data));
-          assert.ok(data);
-          logger.info("Foursquare.Users.getTodos(self) : \033[22;32mOK");
+          assert.ok(data.todos);
+          assert.ok(data.todos.count >= 0);
+          assert.ok(data.todos.items);
+          ok(test);
         } catch (error) {
-          logger.error("Foursquare.Users.getTodos \033[22;31mERROR: " + error.message);
+          reportError(test, error);
         }
       }
     });
   };
 
   Tests.Users.getVenueHistory = function() {
-    Foursquare.Users.getVenueHistory(null, accessToken, null, function (error, data) {
+    var test = "Foursquare.Users.getVenueHistory(self)";
+    Foursquare.Users.getVenueHistory(null, null, accessToken, function (error, data) {
       if(error) {
-        logger.error("Foursquare.Users.getVenueHistory \033[22;31mERROR: " + error.message);
+        reportError(test, error.message);
       }
       else {
         try {
           logger.trace(sys.inspect(data));
-          assert.ok(data);
-          logger.info("Foursquare.Users.getVenueHistory(self) : \033[22;32mOK");
+          assert.ok(data.venues);
+          assert.ok(data.venues.count >= 0);
+          assert.ok(data.venues.items);
+          ok(test);
         } catch (error) {
-          logger.error("Foursquare.Users.getVenueHistory \033[22;31mERROR: " + error.message);
+          reportError(test, error);
         }
       }
     });
   };
 
   Tests.Venues.search = function() {
-    var query = { "lat": "40.7", "lng" : "-74" };
-    Foursquare.Venues.search(query, accessToken, function (error, data) {
+    var test = "Foursquare.Venues.search(40.7, -74)";
+    Foursquare.Venues.search("40.7", "-74", {}, accessToken, function (error, data) {
       if(error) {
-        logger.error("Foursquare.Venues.search \033[22;31mERROR: " + error.message);
+        reportError(test, error);
       }
       else {
         try {
           logger.trace(sys.inspect(data));
-          assert.equal(data[0].type, "trending");
-          logger.info("Foursquare.Venues.search(lat: 40.7, lng: -74) : \033[22;32mOK");
+          assert.ok(data.groups);
+          ok(test);
         } catch (error) {
-          logger.error("Foursquare.Venues.search \033[22;31mERROR: " + error.message);
+          reportError(test, error);
         }
       }
     });
   };
 
   Tests.Venues.getTrending = function() {
-    var query = { "lat": "40.7", "lng" : "-74" };
-    Foursquare.Venues.getTrending(query, accessToken, function (error, data) {
+    var test = "Foursquare.Venues.getTrending(40.7, -74)";
+    Foursquare.Venues.getTrending("40.7", "-74", {}, accessToken, function (error, data) {
       if(error) {
-        logger.error("Foursquare.Venues.getTrending \033[22;31mERROR: " + error.message);
+        reportError(test, error.message);
       }
       else {
         try {
           logger.trace(sys.inspect(data));
-          assert.ok(data[0].hereNow.count > 0);
-          logger.info("Foursquare.Venues.getTrending(lat: 40.7, lng: -74) : \033[22;32mOK");
+          assert.ok(data.venues);
+          ok(test);
         } catch (error) {
-          logger.error("Foursquare.Venues.getTrending \033[22;31mERROR: " + error.message);
+          reportError(test, error);
         }
       }
     });
   };
 
-
   Tests.Venues.getVenue = function() {
+    var test = "Foursquare.Venues.getVenue(5104)";
     Foursquare.Venues.getVenue(5104, accessToken, function (error, data) {
       if(error) {
-        logger.error("Foursquare.Venues.getVenue \033[22;31mERROR: " + error.message);
+        reportError(test, error.message);
       }
       else {
         try {
           logger.trace(sys.inspect(data));
-          assert.equal(data.id, "40a55d80f964a52020f31ee3");
-          logger.info("Foursquare.Venues.getVenue(5104) : \033[22;32mOK");
+          assert.ok(data.venue);
+          assert.equal(data.venue.id, "40a55d80f964a52020f31ee3");
+          ok(test);
         } catch (error) {
-          logger.error("Foursquare.Venues.getVenue \033[22;31mERROR: " + error.message);
+          reportError(test, error);
         }
       }
     });
   };
 
   Tests.Venues.getHereNow = function() {
-    Foursquare.Venues.getHereNow(5104, accessToken, null, function (error, data) {
+    var test = "Foursquare.Venues.getHereNow(5104)";
+    Foursquare.Venues.getHereNow(5104, null, accessToken, function (error, data) {
       if(error) {
-        logger.error("Foursquare.Venues.getHereNow \033[22;31mERROR: " + error.message);
+        reportError(test, error.message);
       }
       else {
         try {
           logger.trace(sys.inspect(data));
-          assert.ok(data);
-          logger.info("Foursquare.Venues.getHereNow(5104) : \033[22;32mOK");
+          assert.ok(data.hereNow);
+          assert.ok(data.hereNow.count >= 0);
+          assert.ok(data.hereNow.items);
+          ok(test);
         } catch (error) {
-          logger.error("Foursquare.Venues.getHereNow \033[22;31mERROR: " + error.message);
+          reportError(test, error);
         }
       }
     });
   };
 
   Tests.Venues.getTips = function() {
-    Foursquare.Venues.getTips(5104, accessToken, null, function (error, data) {
+    var test = "Foursquare.Venues.getTips(5104)";
+    Foursquare.Venues.getTips(5104, null, accessToken, function (error, data) {
       if(error) {
-        logger.error("Foursquare.Venues.getTips \033[22;31mERROR: " + error.message);
+        reportError(test, error.message);
       }
       else {
         try {
           logger.trace(sys.inspect(data));
-          assert.ok(data);
-          logger.info("Foursquare.Venues.getTips(5104) : \033[22;32mOK");
+          assert.ok(data.tips);
+          assert.ok(data.tips.count >= 0);
+          assert.ok(data.tips.items);
+          ok(test);
         } catch (error) {
-          logger.error("Foursquare.Venues.getTips \033[22;31mERROR: " + error.message);
+          reportError(test, error);
         }
       }
     });
   };
 
   Tests.Venues.getPhotos = function() {
-    Foursquare.Venues.getPhotos(5104, accessToken, null, function (error, data) {
+    var test = "Foursquare.Venues.getPhotos(5104)";
+    Foursquare.Venues.getPhotos(5104, null, null, accessToken, function (error, data) {
       if(error) {
-        logger.error("Foursquare.Venues.getPhotos \033[22;31mERROR: " + error.message);
+        reportError(test, error.message);
       }
       else {
         try {
           logger.trace(sys.inspect(data));
-          assert.ok(data);
-          logger.info("Foursquare.Venues.getPhotos(5104) : \033[22;32mOK");
+          assert.ok(data.photos);
+          assert.ok(data.photos.count >= 0);
+          assert.ok(data.photos.items);
+          ok(test);
         } catch (error) {
-          logger.error("Foursquare.Venues.getPhotos \033[22;31mERROR: " + error.message);
+          reportError(test, error);
         }
       }
     });
   };
 
   Tests.Venues.getLinks = function() {
-    Foursquare.Venues.getLinks(5104, accessToken, null, function (error, data) {
+    var test = "Foursquare.Venues.getLinks(5104)";
+    Foursquare.Venues.getLinks(5104, null, accessToken, function (error, data) {
       if(error) {
-        logger.error("Foursquare.Venues.getLinks \033[22;31mERROR: " + error.message);
+        reportError(test, error.message);
       }
       else {
         try {
           logger.trace(sys.inspect(data));
-          assert.ok(data);
-          logger.info("Foursquare.Venues.getLinks(5104) : \033[22;32mOK");
+          assert.ok(data.links);
+          assert.ok(data.links.count >= 0);
+          assert.ok(data.links.items);
+          ok(test);
         } catch (error) {
-          logger.error("Foursquare.Venues.getLinks \033[22;31mERROR: " + error.message);
+          reportError(test, error);
         }
       }
     });
   };
 
   Tests.Checkins.getCheckin = function() {
-    Foursquare.Checkins.getCheckin("4dae3f9e4df0f639f248ca13", accessToken, null, function (error, data) {
+    var test = "Foursquare.Checkins.getCheckin(4dae3f9e4df0f639f248ca13)";
+    Foursquare.Checkins.getCheckin("4dae3f9e4df0f639f248ca13", null, accessToken, function (error, data) {
       if(error) {
-        logger.error("Foursquare.Checkins.getCheckin \033[22;31mERROR: " + error.message);
+        reportError(test, error.message);
       }
       else {
         try {
           logger.trace(sys.inspect(data));
-          assert.equal(data.id, "4dae3f9e4df0f639f248ca13");
-          logger.info("Foursquare.Checkins.getCheckin(4dae3f9e4df0f639f248ca13) : \033[22;32mOK");
+          assert.ok(data.checkin);
+          assert.equal(data.checkin.id, "4dae3f9e4df0f639f248ca13");
+          assert.equal(data.checkin.type, "checkin");
+          ok(test);
         } catch (error) {
-          logger.error("Foursquare.Checkins.getCheckin \033[22;31mERROR: " + error.message);
+          reportError(test, error);
         }
       }
     });
   };
 
   Tests.Checkins.getRecentCheckins = function() {
-    Foursquare.Checkins.getRecentCheckins(accessToken, null, function (error, data) {
+    var test = "Foursquare.Checkins.getRecentCheckins()";
+    Foursquare.Checkins.getRecentCheckins(null, accessToken, function (error, data) {
       if(error) {
-        logger.error("Foursquare.Checkins.getRecentCheckins \033[22;31mERROR: " + error.message);
+        reportError(test, error.message);
       }
       else {
         try {
           logger.trace(sys.inspect(data));
-          assert.ok(data);
-          logger.info("Foursquare.Checkins.getRecentCheckins() : \033[22;32mOK");
+          assert.ok(data.recent);
+          ok(test);
         } catch (error) {
-          logger.error("Foursquare.Checkins.getRecentCheckins \033[22;31mERROR: " + error.message);
+          reportError(test, error);
         }
       }
     });
   };
 
   Tests.Tips.getTip = function() {
+    var test = "Foursquare.Tips.getTip(4b5e662a70c603bba7d790b4)";
     Foursquare.Tips.getTip("4b5e662a70c603bba7d790b4", accessToken, function (error, data) {
       if(error) {
-        logger.error("Foursquare.Tips.getTip \033[22;31mERROR: " + error.message);
+        reportError(test, error.message);
       }
       else {
         try {
           logger.trace(sys.inspect(data));
-          assert.ok(data);
-          logger.info("Foursquare.Tips.getTip(4b5e662a70c603bba7d790b4) : \033[22;32mOK");
+          assert.ok(data.tip);
+          assert.equal(data.tip.id, "4b5e662a70c603bba7d790b4");
+          ok(test);
         } catch (error) {
-          logger.error("Foursquare.Tips.getTip \033[22;31mERROR: " + error.message);
+          reportError(test, error);
         }
       }
     });
   };
 
   Tests.Tips.search = function() {
-	  var query = { "lat" : "40.7", "lng" : "-74" };
-
-    Foursquare.Tips.search(query, accessToken, null, function (error, data) {
+    var test = "Foursquare.Tips.search(lat: 40.7, lng: -74)";
+    Foursquare.Tips.search("40.7", "-74", null, accessToken, function (error, data) {
       if(error) {
-        logger.error("Foursquare.Tips.search \033[22;31mERROR: " + error.message);
+        reportError(test, error.message);
       }
       else {
         try {
           logger.trace(sys.inspect(data));
-          assert.ok(data);
-          logger.info("Foursquare.Tips.search(lat: 40.7, lng: -74) : \033[22;32mOK");
+          assert.ok(data.tips);
+          ok(test);
         } catch (error) {
-          logger.error("Foursquare.Tips.search \033[22;31mERROR: " + error.message);
+          reportError(test, error);
         }
       }
     });
   };
 
   Tests.Photos.getPhoto = function() {
+    var test = "Foursquare.Photos.getPhoto(4d0fb8162d39a340637dc42b)";
     Foursquare.Photos.getPhoto("4d0fb8162d39a340637dc42b", accessToken, function (error, data) {
       if(error) {
-        logger.error("Foursquare.Photos.getPhoto \033[22;31mERROR: " + error.message);
+        reportError(test, error.message);
       }
       else {
         try {
           logger.trace(sys.inspect(data));
-          assert.equal(data.id, "4d0fb8162d39a340637dc42b");
-          logger.info("Foursquare.Photos.getPhoto(4d0fb8162d39a340637dc42b) : \033[22;32mOK");
+          assert.ok(data.photo);
+          assert.equal(data.photo.id, "4d0fb8162d39a340637dc42b");
+          ok(test);
         } catch (error) {
-          logger.error("Foursquare.Photos.getPhoto \033[22;31mERROR: " + error.message);
+          reportError(test, error);
         }
       }
     });
   };
 
   Tests.Settings.getSettings = function() {
+    var test = "Foursquare.Settings.getSettings()";
     Foursquare.Settings.getSettings(accessToken, function (error, data) {
       if(error) {
-        logger.error("Foursquare.Settings.getPhoto \033[22;31mERROR: " + error.message);
+        reportError(test, error.message);
       }
       else {
         try {
           logger.trace(sys.inspect(data));
-          assert.ok(data);
-          logger.info("Foursquare.Settings.getSettings() : \033[22;32mOK");
+          assert.ok(data.settings);
+          ok(test);
         } catch (error) {
-          logger.error("Foursquare.Settings.getSettings \033[22;31mERROR: " + error.message);
+          reportError(test, error);
+        }
+      }
+    });
+  };
+
+  Tests.Settings.getSetting = function() {
+    var test = "Foursquare.Settings.getSetting('receivePings')";
+    Foursquare.Settings.getSetting("receivePings", accessToken, function (error, data) {
+      if(error) {
+        reportError(test, error.message);
+      }
+      else {
+        try {
+          logger.trace(sys.inspect(data));
+          assert.ok(data.value !== undefined);
+          ok(test);
+        } catch (error) {
+          reportError(test, error);
+        }
+      }
+    });
+  };
+
+  Tests.Specials.search = function() {
+    var test = "Foursquare.Specials.search(40.7, -74)";
+    Foursquare.Specials.search("40.7", "-74", {}, accessToken, function (error, data) {
+      if(error) {
+        reportError(test, error.message);
+      }
+      else {
+        try {
+          logger.trace(sys.inspect(data));
+          assert.ok(data.specials);
+          assert.ok(data.specials.count >= 0);
+          assert.ok(data.specials.items);
+          ok(test);
+        } catch (error) {
+          reportError(test, error);
         }
       }
     });
@@ -416,31 +528,31 @@ function TestSuite(accessToken) {
 
 var app = express.createServer();
 
-app.get('/login', function(req, res) {
+app.get('/', function(req, res) {
   var url = Foursquare.getAuthClientRedirectUrl(config.clientId, config.redirectUrl);
   sys.log(url);
 	res.writeHead(303, { "location": url });
 	res.end();
 });
 
-  app.get('/callback', function (req, res) {
+app.get('/callback', function (req, res) {
 
-    var code = req.query.code;
+  var code = req.query.code;
 
-    Foursquare.getAccessToken({
-      code: code,
-      redirect_uri: config.redirectUrl,
-      client_id: config.clientId,
-      client_secret: config.clientSecret
-    }, function (error, accessToken) {
-      if(error) {
-        res.send("An error was thrown: " + error.message);
-      }
-      else {
-        res.redirect("/test?token=" + accessToken);
-      }
-    });
+  Foursquare.getAccessToken({
+    code: code,
+    redirect_uri: config.redirectUrl,
+    client_id: config.clientId,
+    client_secret: config.clientSecret
+  }, function (error, accessToken) {
+    if(error) {
+      res.send("An error was thrown: " + error.message);
+    }
+    else {
+      res.redirect("/test?token=" + accessToken);
+    }
   });
+});
 
 app.get("/test", function(req, res) {
   var accessToken = req.query.token;
@@ -451,10 +563,6 @@ app.get("/test", function(req, res) {
   } else {
     res.send("accessToken was not successfully retreived.");
   }
-});
-
-app.get('/', function(req, res){
-    res.send("Please <a href=\"/login\">login</a> to run the tests");
 });
 
 app.listen(3000);

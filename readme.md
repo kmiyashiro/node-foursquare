@@ -3,10 +3,21 @@ node-foursquare
 
 Fault-tolerant Foursquare API wrapper for Node JS.
 
+
 Install
 -------
 
     npm install node-foursquare
+
+Version History
+---------------
+
+*  v0.0.1 - First release
+*  v0.0.2 - Bug Fixes and Downstream Merges
+*  v0.1.0 - New Endpoints and Suggested Refactoring (NON-PASSIVE)
+    * Userless Access Tokens (for Venues, etc).
+    * Users - Leadeboard, Requests
+    * Venues - Categories, Explore
 
 
 Use

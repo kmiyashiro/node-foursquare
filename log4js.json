@@ -3,7 +3,15 @@
     "type" : "console"
   }],
   "levels" : {
-    "node-foursquare-test" : "INFO",
-    "node-foursquare" : "OFF"
+    "node-foursquare" : "WARN",
+    "node-foursquare.core" : "WARN",
+    "node-foursquare.Users" : "WARN",
+    "node-foursquare.Venues" : "WARN",
+    "node-foursquare.Checkins" : "WARN",
+    "node-foursquare.Tips" : "WARN",
+    "node-foursquare.Photos" : "WARN",
+    "node-foursquare.Settings" : "WARN",
+    "node-foursquare.Specials" : "WARN",
+    "node-foursquare-test" : "INFO"
   }
 }
