@@ -3,8 +3,11 @@ var sys = require('sys'),
 	assert = require('assert'),
   logger = require("log4js")().getLogger("node-foursquare-test");
 
-var Foursquare = require('./../lib/node-foursquare')(),
-	config = require('./config').config,
+var config = require('./config').config;
+
+logger.debug("Configuration: " + sys.inspect(config));
+
+var Foursquare = require('./../lib/node-foursquare')(config);
   core = require("./../lib/core")(config);
 
 function reportError(test, message) {
@@ -257,6 +260,25 @@ function TestSuite(accessToken) {
     });
   };
 
+  Tests.Venues.explore = function() {
+    var test = "Foursquare.Venues.explore(40.7, -74)";
+    Foursquare.Venues.explore("40.7", "-74", {}, accessToken, function (error, data) {
+      if(error) {
+        reportError(test, error.message);
+      }
+      else {
+        try {
+          logger.trace(sys.inspect(data));
+          assert.ok(data.keywords);
+          assert.ok(data.groups);
+          ok(test);
+        } catch (error) {
+          reportError(test, error);
+        }
+      }
+    });
+  };
+
   Tests.Venues.getVenue = function() {
     var test = "Foursquare.Venues.getVenue(5104)";
     Foursquare.Venues.getVenue(5104, accessToken, function (error, data) {
@@ -477,7 +499,7 @@ function TestSuite(accessToken) {
       else {
         try {
           logger.trace(sys.inspect(data));
-          assert.ok(data.value !== undefined);
+          assert.ok(typeof data.value !== "undefined");
           ok(test);
         } catch (error) {
           reportError(test, error);
@@ -555,14 +577,9 @@ app.get('/callback', function (req, res) {
 });
 
 app.get("/test", function(req, res) {
-  var accessToken = req.query.token;
-
-  if (accessToken !== undefined) {
-    TestSuite(accessToken).execute();
-    res.send('<html></html><title>Testing...</title><body>Please check the console.</body></html>');
-  } else {
-    res.send("accessToken was not successfully retreived.");
-  }
+  var accessToken = req.query.token || null;
+  TestSuite(accessToken).execute("Settings", "getSetting");
+  res.send('<html></html><title>Testing...</title><body>Please check the console.</body></html>');
 });
 
 app.listen(3000);
