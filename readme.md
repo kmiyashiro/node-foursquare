@@ -38,23 +38,20 @@ Foursquare URLs if necessary, (but that is unlikely).
 
     var foursquare = require("node-foursquare").Foursquare(config);
 
-Once instantiated, you just need to set up the correct endpoints on your own server that match your OAuth configuration
-in Foursquare.  Using express, for example:
+Once instantiated, you just need to set up endpoints on your own server that match your OAuth configuration
+in Foursquare.  Using Express, for example:
 
     var app = express.createServer();
 
     app.get('/login', function(req, res) {
-      var url = Foursquare.getAuthClientRedirectUrl();
-      res.writeHead(303, { "location": url });
+      res.writeHead(303, { "location": Foursquare.getAuthClientRedirectUrl() });
       res.end();
     });
 
 
     app.get('/callback', function (req, res) {
-      var code = req.query.code;
-
       Foursquare.getAccessToken({
-        code: code
+        code: req.query.code
       }, function (error, accessToken) {
         if(error) {
           res.send("An error was thrown: " + error.message);
@@ -64,10 +61,6 @@ in Foursquare.  Using express, for example:
         }
       });
     });
-
-All methods within the module require the Access Token from the callback.
-
-For more details and examples, take a look at the test oracle in the /test directory.
 
 Logging
 -------
@@ -94,7 +87,7 @@ INFO (and higher) messages in Venues:
 
     var foursquare = require("node-foursquare").Foursquare(config);
 
-For a list of existing logging points, refer to [https://github.com/clintandrewhall/node-foursquare/blob/master/lib/config-default.js](config-default.js).
+For a list of existing logging points, refer to [config-default.js](https://github.com/clintandrewhall/node-foursquare/blob/master/lib/config-default.js).
 
 For more information, visit: https://github.com/csausdev/log4js-node
 
