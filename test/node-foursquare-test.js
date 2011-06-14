@@ -1,13 +1,13 @@
 var sys = require('sys'),
 	express = require('express'),
 	assert = require('assert'),
-  logger = require("log4js")().getLogger("node-foursquare-test");
+  log4js = require("log4js")(),
+  config = require('./config').config;
 
-var config = require('./config').config;
+log4js.configure(config.log4js);
 
-logger.debug("Configuration: " + sys.inspect(config));
-
-var Foursquare = require('./../lib/node-foursquare')(config);
+var logger = log4js.getLogger("node-foursquare-test"),
+  Foursquare = require('./../lib/node-foursquare')(config);
   core = require("./../lib/core")(config);
 
 function reportError(test, message) {
@@ -30,7 +30,9 @@ function TestSuite(accessToken) {
   };
 
   Tests.Users.search = function() {
-    var params = { "twitter": "naveen" }, test = "Foursquare.Users.search(twitter=naveen)";
+    var params = { "twitter": "naveen" },
+      test = "Foursquare.Users.search(twitter=naveen)";
+    
     Foursquare.Users.search(params, accessToken, function(error, data) {
       if(error) {
         reportError(test, error.message);
@@ -548,6 +550,7 @@ function TestSuite(accessToken) {
   }
 }
 
+// Using express was just faster... *sigh*
 var app = express.createServer();
 
 app.get('/', function(req, res) {
@@ -559,13 +562,8 @@ app.get('/', function(req, res) {
 
 app.get('/callback', function (req, res) {
 
-  var code = req.query.code;
-
   Foursquare.getAccessToken({
-    code: code,
-    redirect_uri: config.redirectUrl,
-    client_id: config.clientId,
-    client_secret: config.clientSecret
+    code: req.query.code
   }, function (error, accessToken) {
     if(error) {
       res.send("An error was thrown: " + error.message);
@@ -578,7 +576,7 @@ app.get('/callback', function (req, res) {
 
 app.get("/test", function(req, res) {
   var accessToken = req.query.token || null;
-  TestSuite(accessToken).execute("Settings", "getSetting");
+  TestSuite(accessToken).execute();
   res.send('<html></html><title>Testing...</title><body>Please check the console.</body></html>');
 });
 
