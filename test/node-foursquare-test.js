@@ -52,7 +52,7 @@ function TestSuite(accessToken) {
   };
 
   Tests.Users.getLeaderboard = function() {
-    var test = "Foursquare.Users.getLeaderboard";
+    var test = "Foursquare.Users.getLeaderboard()";
     Foursquare.Users.getLeaderboard({}, accessToken, function (error, data) {
       if(error) {
         reportError(test, error.message);
@@ -226,6 +226,24 @@ function TestSuite(accessToken) {
     });
   };
 
+  Tests.Users.getRequests = function() {
+    var test = "Foursquare.Users.getRequests()";
+    Foursquare.Users.getRequests(accessToken, function (error, data) {
+      if(error) {
+        reportError(test, error.message);
+      }
+      else {
+        try {
+          logger.trace(sys.inspect(data));
+          assert.ok(data.requests);
+          ok(test);
+        } catch (error) {
+          reportError(test, error);
+        }
+      }
+    });
+  };
+
   Tests.Venues.search = function() {
     var test = "Foursquare.Venues.search(40.7, -74)";
     Foursquare.Venues.search("40.7", "-74", {}, accessToken, function (error, data) {
@@ -254,6 +272,24 @@ function TestSuite(accessToken) {
         try {
           logger.trace(sys.inspect(data));
           assert.ok(data.venues);
+          ok(test);
+        } catch (error) {
+          reportError(test, error);
+        }
+      }
+    });
+  };
+
+  Tests.Venues.getCategories = function() {
+    var test = "Foursquare.Venues.getCategories()";
+    Foursquare.Venues.getCategories({}, accessToken, function (error, data) {
+      if(error) {
+        reportError(test, error.message);
+      }
+      else {
+        try {
+          logger.trace(sys.inspect(data));
+          assert.ok(data.categories);
           ok(test);
         } catch (error) {
           reportError(test, error);
