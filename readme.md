@@ -94,7 +94,7 @@ INFO (and higher) messages in Venues:
 
     var foursquare = require("node-foursquare").Foursquare(config);
 
-For a list of existing logging points, refer to the config-default.js file
+For a list of existing logging points, refer to [https://github.com/clintandrewhall/node-foursquare/blob/master/lib/config-default.js](config-default.js).
 
 For more information, visit: https://github.com/csausdev/log4js-node
 
