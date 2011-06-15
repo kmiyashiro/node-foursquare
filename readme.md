@@ -36,7 +36,7 @@ Foursquare URLs if necessary, (but that is unlikely).
       }
     }
 
-    var foursquare = require("node-foursquare").Foursquare(config);
+    var foursquare = require("node-foursquare")(config);
 
 Once instantiated, you just need to set up endpoints on your own server that match your OAuth configuration
 in Foursquare.  Using Express, for example:
