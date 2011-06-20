@@ -317,8 +317,8 @@ function TestSuite(accessToken) {
   };
 
   Tests.Venues.getVenue = function() {
-    var test = "Foursquare.Venues.getVenue(5104)";
-    Foursquare.Venues.getVenue(5104, accessToken, function (error, data) {
+    var test = "Foursquare.Venues.getVenue('5104')";
+    Foursquare.Venues.getVenue("5104", accessToken, function (error, data) {
       if(error) {
         reportError(test, error.message);
       }
@@ -336,8 +336,8 @@ function TestSuite(accessToken) {
   };
 
   Tests.Venues.getHereNow = function() {
-    var test = "Foursquare.Venues.getHereNow(5104)";
-    Foursquare.Venues.getHereNow(5104, null, accessToken, function (error, data) {
+    var test = "Foursquare.Venues.getHereNow('5104')";
+    Foursquare.Venues.getHereNow("5104", null, accessToken, function (error, data) {
       if(error) {
         reportError(test, error.message);
       }
@@ -356,8 +356,8 @@ function TestSuite(accessToken) {
   };
 
   Tests.Venues.getTips = function() {
-    var test = "Foursquare.Venues.getTips(5104)";
-    Foursquare.Venues.getTips(5104, null, accessToken, function (error, data) {
+    var test = "Foursquare.Venues.getTips('5104')";
+    Foursquare.Venues.getTips("5104", null, accessToken, function (error, data) {
       if(error) {
         reportError(test, error.message);
       }
@@ -376,8 +376,8 @@ function TestSuite(accessToken) {
   };
 
   Tests.Venues.getPhotos = function() {
-    var test = "Foursquare.Venues.getPhotos(5104)";
-    Foursquare.Venues.getPhotos(5104, null, null, accessToken, function (error, data) {
+    var test = "Foursquare.Venues.getPhotos('5104')";
+    Foursquare.Venues.getPhotos("5104", null, null, accessToken, function (error, data) {
       if(error) {
         reportError(test, error.message);
       }
@@ -396,8 +396,8 @@ function TestSuite(accessToken) {
   };
 
   Tests.Venues.getLinks = function() {
-    var test = "Foursquare.Venues.getLinks(5104)";
-    Foursquare.Venues.getLinks(5104, null, accessToken, function (error, data) {
+    var test = "Foursquare.Venues.getLinks('5104')";
+    Foursquare.Venues.getLinks("5104", null, accessToken, function (error, data) {
       if(error) {
         reportError(test, error.message);
       }
