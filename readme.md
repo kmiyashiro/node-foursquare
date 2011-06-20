@@ -67,7 +67,7 @@ Foursquare API Version and Deprecation Warnings
 -----------------------------------------------
 
 Foursquare allows consumers to specify a "version" of their API to invoke, based on the date that version became active.
-For example, passing a version string of "20110101" uses the API as of Jan 1, 2011.  By default, this library will pass
+For example, passing a version string of "20110101" uses the API as of Jan 1, 2011.  By default, this library will use
 a version of today's date.
 
 To enable a different version of the API, add the following to configuration.
@@ -82,8 +82,9 @@ To enable a different version of the API, add the following to configuration.
       ...
     }
 
-When using an older API, Foursquare will provide deprecation warnings if applicable. By default, this library will log
-warnings to the log, (which will only be visible if logging for "node-foursquare" is turned on, see below).
+When using an older API, Foursquare will provide deprecation warnings, (if applicable). By default, this library will
+write these warnings to the log, which will only be visible if logging for "node-foursquare" is turned on, (see
+"Logging", below).
 
 You can configure this library to throw an error instead:
 
@@ -101,9 +102,9 @@ You can configure this library to throw an error instead:
 Logging
 -------
 
-This module uses Log4js to log events. By default, everything is set to "OFF". If you want to output logging messages
-from the different modules of this library, you can add overrides to your configuration object.  For example, to log
-INFO (and higher) messages in Venues:
+This module uses Log4js to log events. By default, everything is set to "OFF" and no appenders are configured. If you
+want to output logging messages from the different modules of this library, you can add overrides to your configuration
+object.  For example, to log INFO (and higher) messages in Venues to the console:
 
     var config = {
       "log4js" : {
@@ -121,7 +122,7 @@ INFO (and higher) messages in Venues:
 
 For a list of existing logging points, refer to [config-default.js](https://github.com/clintandrewhall/node-foursquare/blob/master/lib/config-default.js).
 
-For more information, visit: https://github.com/csausdev/log4js-node
+For more information, see: https://github.com/csausdev/log4js-node
 
 Testing
 -------
@@ -140,15 +141,17 @@ Then, simply invoke the test.js file with Node.JS:
 
     node test.js
 
-If you hit [http://localhost:3000/test](http://localhost:3000/test), you'll test the entire library with no authentication, (and get appropriate
-errors for protected endpoints.
-
 If you hit [http://localhost:3000](http://localhost:3000), you'll be redirected for an authentication token.
+
+If you hit [http://localhost:3000/test](http://localhost:3000/test), you'll test the entire library with no authentication, (and get appropriate
+errors for protected endpoints).
 
 If you hit [http://localhost:3000/deprecations](http://localhost:3000/deprecations), you'll test an endpoint with older versions and
 errors vs. warnings.
 
 Testing results will be logged to the console.
+
+All tests use examples as suggested by the [Foursquare Endpoint Explorer](https://developer.foursquare.com/docs/explore.html).
 
 Documentation
 -------------
