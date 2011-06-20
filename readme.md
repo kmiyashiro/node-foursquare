@@ -20,6 +20,7 @@ Version History
     * Ability to load single portions of the library, (e.g. only import Venues).
     * Users - Leaderboard, Requests
     * Venues - Categories, Explore
+* v0.1.1 - Support for Foursquare API Version + Deprecation Warnings (via configuration).
 
 
 Use
@@ -62,6 +63,41 @@ in Foursquare.  Using Express, for example:
       });
     });
 
+Foursquare API Version and Deprecation Warnings
+-----------------------------------------------
+
+Foursquare allows consumers to specify a "version" of their API to invoke, based on the date that version became active.
+For example, passing a version string of "20110101" uses the API as of Jan 1, 2011.  By default, this library will pass
+a version of today's date.
+
+To enable a different version of the API, add the following to configuration.
+
+    var config = {
+      ...
+      "foursquare" : {
+        ...
+        "version" : "20110101",
+        ...
+      }
+      ...
+    }
+
+When using an older API, Foursquare will provide deprecation warnings if applicable. By default, this library will log
+warnings to the log, (which will only be visible if logging for "node-foursquare" is turned on, see below).
+
+You can configure this library to throw an error instead:
+
+    var config = {
+      ...
+      "foursquare" : {
+        ...
+        "warnings" : "ERROR",
+        ...
+      }
+      ...
+    }
+
+
 Logging
 -------
 
@@ -77,12 +113,8 @@ INFO (and higher) messages in Venues:
         "levels" : {
           "node-foursquare.Venues" : "INFO"
         }
-      },
-      "secrets" : {
-        "clientId" : "CLIENT_ID",
-        "clientSecret" : "CLIENT_SECRET",
-        "redirectUrl" : "REDIRECT_URL"
       }
+      ...
     }
 
     var foursquare = require("node-foursquare")(config);
@@ -112,6 +144,9 @@ If you hit [http://localhost:3000/test](http://localhost:3000/test), you'll test
 errors for protected endpoints.
 
 If you hit [http://localhost:3000](http://localhost:3000), you'll be redirected for an authentication token.
+
+If you hit [http://localhost:3000/deprecations](http://localhost:3000/deprecations), you'll test an endpoint with older versions and
+errors vs. warnings.
 
 Testing results will be logged to the console.
 

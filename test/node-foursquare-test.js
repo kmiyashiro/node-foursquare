@@ -8,7 +8,6 @@ log4js.configure(config.log4js);
 
 var logger = log4js.getLogger("node-foursquare-test"),
   Foursquare = require('./../lib/node-foursquare')(config);
-  core = require("./../lib/core")(config);
 
 function reportError(test, message) {
   logger.error(test + " :  \033[22;31mERROR: " + message + "\x1B[0m");
@@ -253,7 +252,7 @@ function TestSuite(accessToken) {
       else {
         try {
           logger.trace(sys.inspect(data));
-          assert.ok(data.groups);
+          assert.ok(data.venues);
           ok(test);
         } catch (error) {
           reportError(test, error);
@@ -586,6 +585,42 @@ function TestSuite(accessToken) {
   }
 }
 
+function testDeprecated() {
+  var depConfig = require("./config").config;
+
+  depConfig.foursquare.version = "20110101";
+  depConfig.log4js.levels["node-foursquare"] = "INFO";
+  depConfig.log4js.levels["node-foursquare.core"] = "WARN";
+  depConfig.foursquare.warnings = "WARN";
+  
+  var depFoursquare =   Foursquare = require('./../lib/node-foursquare')(depConfig),
+    test = "(Version 20110101, WARN) Foursquare.Venues.search(40.7, -74)";
+
+  function run(error, data) {
+    if(error) {
+      reportError(test, error);
+    }
+    else {
+      try {
+        logger.trace(sys.inspect(data));
+        assert.ok(data.groups);
+        ok(test);
+      } catch (error) {
+        reportError(test, error);
+      }
+    }
+  }
+
+  depFoursquare.Venues.search("40.7", "-74", {}, null, function(error, data) {
+    run(error, data);
+    test = "(Version 20110101, ERROR) Foursquare.Venues.search(40.7, -74)",
+    depConfig.foursquare.warnings = "ERROR";
+    depFoursquare.Venues.search("40.7", "-74", {}, null, function(error, data) {
+      run(error, data);
+    });
+  });
+}
+
 // Using express was just faster... *sigh*
 var app = express.createServer();
 
@@ -610,10 +645,17 @@ app.get('/callback', function (req, res) {
   });
 });
 
+app.get("/deprecated", function(req, res) {
+  logger.info("\n\nTesting Version + Deprecations...\n");
+  testDeprecated();
+  res.send('<html></html><title>Refer to Console</title><body>Testing Version + Deprecations...</body></html>');
+});
+
 app.get("/test", function(req, res) {
-  var accessToken = req.query.token || null;
+  var accessToken = req.query.token || null, type = "Testing with" + (accessToken ? "" : "out") + " Authorization";
+  logger.info("\n\n" + type + "\n");
   TestSuite(accessToken).execute();
-  res.send('<html></html><title>Testing...</title><body>Please check the console.</body></html>');
+  res.send('<html></html><title>Refer to Console</title><body>' + type + '...</body></html>');
 });
 
 app.listen(3000);
